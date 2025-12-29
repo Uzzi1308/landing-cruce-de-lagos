@@ -1,0 +1,1006 @@
+<?php
+/*
+Template Name: Cruce de Lagos
+*/
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Cruce de Lagos entre Chile y Argentina - 10 días de aventura. Descubre Santiago, Puerto Varas, Bariloche y Buenos Aires con La Casa del Viaje.">
+  <title>Cruce de Lagos Chile - Argentina - La Casa del Viaje</title>
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/favicon/site.webmanifest" />
+
+  <!-- Preconnect para recursos externos -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://lacasadelviaje.com.mx">
+  <link rel="preconnect" href="https://randomuser.me">
+
+  <!-- Preload CSS crítico -->
+   <link rel="stylesheet" href="style.css">
+  <!-- <link rel="preload" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/css/style.css" as="style">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"> -->
+
+  <!-- CSS -->
+  <!-- <link rel="stylesheet" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/css/style.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <?php wp_head(); ?>
+  
+</head>
+
+<body>
+<!-- Navigation -->
+<nav>
+  <div class="nav-container">
+    <div class="nav-logo-section">
+      <a href="https://lacasadelviaje.com.mx/" class="logo" target="_blank" rel="noopener noreferrer" id="container-logo-nav">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2024/10/LCDV-logo-white-01.png" alt="La Casa del Viaje" id="logo-img-nav" width="280" height="auto" loading="eager">
+      </a>
+    </div>
+    
+    <div class="nav-links-section">
+      <ul class="nav-links">
+        <li><a href="#destinos">Destinos</a></li>
+        <li><a href="#itinerario">Itinerario</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="https://lacasadelviaje.com.mx/">Inicio</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p id="title-above">CHILE - ARGENTINA</p>
+        <h1>CRUCE DE LAGOS</h1>
+        <p>10 días de aventura entre montañas, lagos y ciudades fascinantes.</p>
+      </div>
+      <div class="form-container">
+        <h3><i class="fas fa-calendar-check"></i> Reserva tu Aventura</h3>
+        
+        <!-- coneccion form-7 -->
+        <?php
+			echo do_shortcode( '[contact-form-7 id="78854f1" title="Home-Barrancas-del-cobre" ]' );
+		?>
+
+        <div class="modal-footer">
+          <p><i class="fas fa-shield-alt"></i> Tus datos están seguros con nosotros</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Experiencia - Cuadrícula 2x2 -->
+<section class="experience-section">
+  <div class="experience-container">
+    <div class="experience-content">
+      <h2 class="experience-title">
+        Vive la magia de los Andes: navega por lagos cristalinos y descubre la belleza natural de Chile y Argentina.
+      </h2>
+      <p class="experience-description">
+        Un viaje inolvidable que combina la sofisticación urbana de Santiago y Buenos Aires con la naturaleza virgen 
+        de la Patagonia. El Cruce de Lagos es una experiencia única que conecta dos países a través de paisajes 
+        espectaculares, navegando por lagos rodeados de montañas nevadas y volcanes imponentes.
+      </p>
+      
+      <div class="experience-features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-water"></i>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">Cruce fronterizo más bello</h4>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">Guías expertos</h4>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div class="feature-content">
+            <h4 class="feature-title">Asistencia 24/7</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cuadrícula 2x2 reemplazando la imagen grande -->
+    <div class="experience-grid-2x2">
+      <!-- Fila 1 -->
+      <div class="grid-item color-item" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secundary) 100%);">
+        <div class="grid-item-content">
+          <i class="fas fa-mountain"></i>
+          <h4>Montañas Andinas</h4>
+        </div>
+      </div>
+      
+      <div class="grid-item image-item">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/experience.png" alt="Lagos patagónicos" loading="lazy">
+        <div class="grid-overlay">
+          <p>Cruce de Lagos</p>
+        </div>
+      </div>
+      
+      <!-- Fila 2 -->
+      <div class="grid-item image-item">
+        <img src="https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Aventura en la Patagonia" loading="lazy">
+        <div class="grid-overlay">
+          <p>Aventura Patagónica</p>
+        </div>
+      </div>
+      
+      <div class="grid-item color-item" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secundary) 100%);">
+        <div class="grid-item-content">
+          <i class="fas fa-ship"></i>
+          <h4>Navegación Única</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Itinerario - Carrusel Infinito -->
+<section class="itinerary" id="itinerario">
+  <h2 class="section-title">Itinerario de 10 Días</h2>
+  <p style="text-align: center; color: #666; font-size: 1.1rem;">
+    DESCUBRE EL RECORRIDO DE TU AVENTURA PATAGÓNICA
+  </p>
+
+  <div class="infinite-carousel-container">
+    <div class="infinite-carousel-track">
+      <!-- Días 1-10 (contenido original) -->
+      <!-- Día 1 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png" alt="Santiago de Chile" loading="lazy">
+          <div class="day-overlay">Día 1</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago de Chile</h3>
+          <ul>
+            <li>Arribo, asistencia y recepción por nuestro personal en el aeropuerto internacional.</li>
+            <li>Traslado en servicio privado al hotel.</li>
+            <li>Resto del día libre para descansar o explorar por tu cuenta.</li>
+            <li>Alojamiento en Santiago.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 2 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png" alt="Tour Santiago" loading="lazy">
+          <div class="day-overlay">Día 2</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago de Chile</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Visita de la ciudad en tour regular: Palacio de la Moneda, Plaza de Armas, Cerro Santa Lucía.</li>
+            <li>Recorrido por el Barrio Lastarria y Bellavista.</li>
+            <li>Visita a las comunas modernas de Providencia, Las Condes y Vitacura.</li>
+            <li>Tarde libre para actividades personales.</li>
+            <li>Alojamiento en Santiago.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 3 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png" alt="Valparaíso y Viña del Mar" loading="lazy">
+          <div class="day-overlay">Día 3</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago – Valparaíso – Viña del Mar</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Salida hacia la costa para visitar Valparaíso, ciudad patrimonial de la humanidad.</li>
+            <li>Subida en ascensor tradicional, paseo por cerros Alegre y Concepción.</li>
+            <li>Visita a La Sebastiana, casa-museo de Pablo Neruda.</li>
+            <li>Continuación a Viña del Mar: Casino, avenidas costeras y playa de Reñaca.</li>
+            <li>Regreso a Santiago. Alojamiento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 4 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png" alt="Puerto Varas" loading="lazy">
+          <div class="day-overlay">Día 4</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago – Puerto Montt – Puerto Varas</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Traslado al aeropuerto para vuelo a Puerto Montt (no incluido).</li>
+            <li>Llegada a Puerto Montt, asistencia y traslado a Puerto Varas.</li>
+            <li>Resto del día libre en la "Ciudad de las Rosas".</li>
+            <li>Vistas espectaculares del volcán Osorno y lago Llanquihue.</li>
+            <li>Alojamiento en Puerto Varas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 5 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png" alt="Cruce de Lagos" loading="lazy">
+          <div class="day-overlay">Día 5</div>
+        </div>
+        <div class="slide-info">
+          <h3>Cruce Internacional de Lagos</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Salida desde Puerto Varas hacia Petrohué, bordeando el Lago Llanquihue.</li>
+            <li>Navegación por Lago Todos los Santos hasta Peulla.</li>
+            <li>Cruce de la Cordillera de los Andes en bus y navegación por Lago Frías.</li>
+            <li>Navegación final por Lago Nahuel Huapi hasta Puerto Pañuelo.</li>
+            <li>Traslado a Bariloche. Alojamiento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 6 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png" alt="Bariloche" loading="lazy">
+          <div class="day-overlay">Día 6</div>
+        </div>
+        <div class="slide-info">
+          <h3>Bariloche - Circuito Chico</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Excursión Circuito Chico: Av. Bustillo, Playa Bonita, cerro Campanario.</li>
+            <li>Visita a península Llao Llao, hotel Llao Llao y capilla San Eduardo.</li>
+            <li>Vistas panorámicas del lago Nahuel Huapi y lago Moreno.</li>
+            <li>Tarde libre en Bariloche para disfrutar de chocolates y cervezas artesanales.</li>
+            <li>Alojamiento en Bariloche.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 7 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png" alt="Buenos Aires" loading="lazy">
+          <div class="day-overlay">Día 7</div>
+        </div>
+        <div class="slide-info">
+          <h3>Bariloche – Buenos Aires</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Traslado al aeropuerto para vuelo a Buenos Aires (no incluido).</li>
+            <li>Arribo a la capital argentina, asistencia y traslado al hotel.</li>
+            <li>Tarde libre para primer contacto con la ciudad.</li>
+            <li>Recomendación: paseo por Puerto Madero al atardecer.</li>
+            <li>Alojamiento en Buenos Aires.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 8 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png" alt="City Tour Buenos Aires" loading="lazy">
+          <div class="day-overlay">Día 8</div>
+        </div>
+        <div class="slide-info">
+          <h3>Buenos Aires</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Visita de la ciudad: Plaza de Mayo, Casa Rosada, Catedral.</li>
+            <li>Recorrido por San Telmo, La Boca y Caminito.</li>
+            <li>Visita a Puerto Madero, Recoleta y Palermo.</li>
+            <li>Tarde libre para compras o actividades opcionales.</li>
+            <li>Noche: sugerencia opcional de cena con espectáculo de tango.</li>
+            <li>Alojamiento en Buenos Aires.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 9 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png" alt="Día libre Buenos Aires" loading="lazy">
+          <div class="day-overlay">Día 9</div>
+        </div>
+        <div class="slide-info">
+          <h3>Buenos Aires - Día Libre</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Día libre para actividades personales.</li>
+            <li>Opciones recomendadas: Excursión al Tigre y Delta del Paraná.</li>
+            <li>Otra opción: día de campo en estancia típica argentina.</li>
+            <li>O simplemente explorar barrios como Palermo Soho, Belgrano o Núñez.</li>
+            <li>Última noche en la capital argentina. Alojamiento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 10 -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png" alt="Regreso" loading="lazy">
+          <div class="day-overlay">Día 10</div>
+        </div>
+        <div class="slide-info">
+          <h3>Buenos Aires - Regreso</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Mañana libre para últimas compras o paseos.</li>
+            <li>A la hora convenida, traslado al aeropuerto internacional.</li>
+            <li>Fin de nuestros servicios.</li>
+            <li>Regreso a casa con experiencias inolvidables de Chile y Argentina.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Repetición para efecto infinito -->
+      <!-- Días 1-10 (duplicado) -->
+      <!-- Día 1 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png" alt="Santiago de Chile" loading="lazy">
+          <div class="day-overlay">Día 1</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago de Chile</h3>
+          <ul>
+            <li>Arribo, asistencia y recepción por nuestro personal en el aeropuerto internacional.</li>
+            <li>Traslado en servicio privado al hotel.</li>
+            <li>Resto del día libre para descansar o explorar por tu cuenta.</li>
+            <li>Alojamiento en Santiago.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 2 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png" alt="Tour Santiago" loading="lazy">
+          <div class="day-overlay">Día 2</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago de Chile</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Visita de la ciudad en tour regular: Palacio de la Moneda, Plaza de Armas, Cerro Santa Lucía.</li>
+            <li>Recorrido por el Barrio Lastarria y Bellavista.</li>
+            <li>Visita a las comunas modernas de Providencia, Las Condes y Vitacura.</li>
+            <li>Tarde libre para actividades personales.</li>
+            <li>Alojamiento en Santiago.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 3 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png" alt="Valparaíso y Viña del Mar" loading="lazy">
+          <div class="day-overlay">Día 3</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago – Valparaíso – Viña del Mar</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Salida hacia la costa para visitar Valparaíso, ciudad patrimonial de la humanidad.</li>
+            <li>Subida en ascensor tradicional, paseo por cerros Alegre y Concepción.</li>
+            <li>Visita a La Sebastiana, casa-museo de Pablo Neruda.</li>
+            <li>Continuación a Viña del Mar: Casino, avenidas costeras y playa de Reñaca.</li>
+            <li>Regreso a Santiago. Alojamiento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 4 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png" alt="Puerto Varas" loading="lazy">
+          <div class="day-overlay">Día 4</div>
+        </div>
+        <div class="slide-info">
+          <h3>Santiago – Puerto Montt – Puerto Varas</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Traslado al aeropuerto para vuelo a Puerto Montt (no incluido).</li>
+            <li>Llegada a Puerto Montt, asistencia y traslado a Puerto Varas.</li>
+            <li>Resto del día libre en la "Ciudad de las Rosas".</li>
+            <li>Vistas espectaculares del volcán Osorno y lago Llanquihue.</li>
+            <li>Alojamiento en Puerto Varas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 5 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png" alt="Cruce de Lagos" loading="lazy">
+          <div class="day-overlay">Día 5</div>
+        </div>
+        <div class="slide-info">
+          <h3>Cruce Internacional de Lagos</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Salida desde Puerto Varas hacia Petrohué, bordeando el Lago Llanquihue.</li>
+            <li>Navegación por Lago Todos los Santos hasta Peulla.</li>
+            <li>Cruce de la Cordillera de los Andes en bus y navegación por Lago Frías.</li>
+            <li>Navegación final por Lago Nahuel Huapi hasta Puerto Pañuelo.</li>
+            <li>Traslado a Bariloche. Alojamiento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 6 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png" alt="Bariloche" loading="lazy">
+          <div class="day-overlay">Día 6</div>
+        </div>
+        <div class="slide-info">
+          <h3>Bariloche - Circuito Chico</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Excursión Circuito Chico: Av. Bustillo, Playa Bonita, cerro Campanario.</li>
+            <li>Visita a península Llao Llao, hotel Llao Llao y capilla San Eduardo.</li>
+            <li>Vistas panorámicas del lago Nahuel Huapi y lago Moreno.</li>
+            <li>Tarde libre en Bariloche para disfrutar de chocolates y cervezas artesanales.</li>
+            <li>Alojamiento en Bariloche.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 7 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png" alt="Buenos Aires" loading="lazy">
+          <div class="day-overlay">Día 7</div>
+        </div>
+        <div class="slide-info">
+          <h3>Bariloche – Buenos Aires</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Traslado al aeropuerto para vuelo a Buenos Aires (no incluido).</li>
+            <li>Arribo a la capital argentina, asistencia y traslado al hotel.</li>
+            <li>Tarde libre para primer contacto con la ciudad.</li>
+            <li>Recomendación: paseo por Puerto Madero al atardecer.</li>
+            <li>Alojamiento en Buenos Aires.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 8 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png" alt="City Tour Buenos Aires" loading="lazy">
+          <div class="day-overlay">Día 8</div>
+        </div>
+        <div class="slide-info">
+          <h3>Buenos Aires</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Visita de la ciudad: Plaza de Mayo, Casa Rosada, Catedral.</li>
+            <li>Recorrido por San Telmo, La Boca y Caminito.</li>
+            <li>Visita a Puerto Madero, Recoleta y Palermo.</li>
+            <li>Tarde libre para compras o actividades opcionales.</li>
+            <li>Noche: sugerencia opcional de cena con espectáculo de tango.</li>
+            <li>Alojamiento en Buenos Aires.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 9 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png" alt="Día libre Buenos Aires" loading="lazy">
+          <div class="day-overlay">Día 9</div>
+        </div>
+        <div class="slide-info">
+          <h3>Buenos Aires - Día Libre</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Día libre para actividades personales.</li>
+            <li>Opciones recomendadas: Excursión al Tigre y Delta del Paraná.</li>
+            <li>Otra opción: día de campo en estancia típica argentina.</li>
+            <li>O simplemente explorar barrios como Palermo Soho, Belgrano o Núñez.</li>
+            <li>Última noche en la capital argentina. Alojamiento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Día 10 (duplicado) -->
+      <div class="infinite-slide">
+        <div class="slide-image">
+          <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png" alt="Regreso" loading="lazy">
+          <div class="day-overlay">Día 10</div>
+        </div>
+        <div class="slide-info">
+          <h3>Buenos Aires - Regreso</h3>
+          <ul>
+            <li>Desayuno en el hotel.</li>
+            <li>Mañana libre para últimas compras o paseos.</li>
+            <li>A la hora convenida, traslado al aeropuerto internacional.</li>
+            <li>Fin de nuestros servicios.</li>
+            <li>Regreso a casa con experiencias inolvidables de Chile y Argentina.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Sección del Mapa -->
+  <section class="map-section">
+    <h2 class="section-title">Recorrido de tu Aventura</h2>
+    <div class="map-container">
+      <div class="route-wrapper">
+        <div class="route-line"></div>
+        <div class="points-grid">
+          <!-- Santiago -->
+          <div class="point">
+            <div class="point-circle">
+              <i class="fas fa-city"></i>
+            </div>
+            <div class="point-name">Santiago</div>
+            <div class="point-tooltip">
+              <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-chihuahua.png" alt="Santiago" class="tooltip-image" loading="lazy" width="400"
+                height="200">
+              <div class="tooltip-content">
+                <div class="tooltip-title">Santiago de Chile</div>
+                <ul class="tooltip-list">
+                  <li>City tour histórico y moderno</li>
+                  <li>Excursión a Valparaíso y Viña</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Puerto Varas -->
+          <div class="point">
+            <div class="point-circle">
+              <i class="fas fa-mountain"></i>
+            </div>
+            <div class="point-name">Puerto Varas</div>
+            <div class="point-tooltip">
+              <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-creel.png" alt="Puerto Varas" class="tooltip-image" loading="lazy" width="400" height="200">
+              <div class="tooltip-content">
+                <div class="tooltip-title">Puerto Varas</div>
+                <ul class="tooltip-list">
+                  <li>Vistas al volcán Osorno</li>
+                  <li>Lago Llanquihue</li>
+                  <li>Punto inicio Cruce de Lagos</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cruce de Lagos -->
+          <div class="point">
+            <div class="point-circle">
+              <i class="fas fa-ship"></i>
+            </div>
+            <div class="point-name">Cruce de Lagos</div>
+            <div class="point-tooltip">
+              <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-divisadero.png" alt="Cruce de Lagos" class="tooltip-image" loading="lazy" width="400"
+                height="200">
+              <div class="tooltip-content">
+                <div class="tooltip-title">Cruce Internacional</div>
+                <ul class="tooltip-list">
+                  <li>Cruce Cordillera Andes</li>
+                  <li>De Chile a Argentina</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bariloche -->
+          <div class="point">
+            <div class="point-circle">
+              <i class="fas fa-tree"></i>
+            </div>
+            <div class="point-name">Bariloche</div>
+            <div class="point-tooltip">
+              <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-fuerte.png" alt="Bariloche" class="tooltip-image" loading="lazy" width="400"
+                height="200">
+              <div class="tooltip-content">
+                <div class="tooltip-title">San Carlos de Bariloche</div>
+                <ul class="tooltip-list">
+                  <li>Circuito Chico incluido</li>
+                  <li>Lagos Nahuel Huapi y Moreno</li>
+                  <li>Capital del chocolate</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buenos Aires -->
+          <div class="point">
+            <div class="point-circle">
+              <i class="fas fa-landmark"></i>
+            </div>
+            <div class="point-name">Buenos Aires</div>
+            <div class="point-tooltip">
+              <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-fuerte.png" alt="Buenos Aires" class="tooltip-image" loading="lazy" width="400"
+                height="200">
+              <div class="tooltip-content">
+                <div class="tooltip-title">Buenos Aires</div>
+                <ul class="tooltip-list">
+                  <li>City tour completo</li>
+                  <li>Barrios típicos</li>
+                  <li>Opcional: show de tango</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Consejos para tu Viaje</h2>
+  <!-- tips-->
+  <div class="featured-destinations">
+    <!-- clima -->
+    <div class="featured-card">
+      <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/tip-frio.png" alt="Clima" class="featured-image" loading="lazy" width="600"
+        height="400">
+      <div class="featured-content">
+        <div class="featured-header">
+          <div class="featured-icon">
+            <i class="fas fa-temperature-low"></i>
+          </div>
+          <h3>Ropa por capas y abrigadora.</h3>
+        </div>
+        <p>El clima patagónico es cambiante. Lleva ropa térmica, impermeable y calzado cómodo para trekking suave y navegación.</p>
+      </div>
+    </div>
+
+    <!-- documentos -->
+    <div class="featured-card">
+      <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/tip-calor.png" alt="Documentos" class="featured-image" loading="lazy" width="600" height="400">
+      <div class="featured-content">
+        <div class="featured-header">
+          <div class="featured-icon">
+            <i class="fas fa-passport"></i>
+          </div>
+          <h3>Documentos en regla.</h3>
+        </div>
+        <p>Pasaporte vigente (mínimo 6 meses). Para algunos países no se requiere visa, pero verifica según tu nacionalidad.</p>
+      </div>
+    </div>
+
+    <!-- salud -->
+    <div class="featured-card">
+      <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/tip-comida.png" alt="Salud" class="featured-image" loading="lazy" width="600" height="400">
+      <div class="featured-content">
+        <div class="featured-header">
+          <div class="featured-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <h3>Protección solar y medicamentos.</h3>
+        </div>
+        <p>El sol en altura es fuerte. Protector solar, lentes y gorra esenciales. Lleva tu botiquín personal y medicamentos recetados.</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Sección de Precios -->
+<section class="precios">
+  <h2 class="section-title">Precios por Persona en USD</h2>
+  <div class="price-grid">
+    <div class="price-card">
+      <h3>Turista</h3>
+      <p class="subtext">desde:</p>
+      <p class="price">$1,725 <span style="font-size: 0.8em; opacity: 0.8;">USD</span></p>
+      <p class="subtext">por persona</p>
+    </div>
+    <div class="price-card popular">
+      <div class="badge">Más Popular</div>
+      <h3>Primera</h3>
+      <p class="subtext">desde:</p>
+      <p class="price">$1,915 <span style="font-size: 0.8em; opacity: 0.8;">USD</span></p>
+      <p class="subtext">por persona</p>
+    </div>
+    <div class="price-card">
+      <h3>Primera Superior</h3>
+      <p class="subtext">desde:</p>
+      <p class="price">$2,140 <span style="font-size: 0.8em; opacity: 0.8;">USD</span></p>
+      <p class="subtext">por persona</p>
+    </div>
+    <div class="price-card">
+      <h3>Hoteles 5*</h3>
+      <p class="subtext">desde:</p>
+      <p class="price">$2,255 <span style="font-size: 0.8em; opacity: 0.8;">USD</span></p>
+      <p class="subtext">por persona</p>
+    </div>
+  </div>
+
+  <div class="notas">
+    <p>
+      <strong>NOTA IMPORTANTE:</strong>
+    <ul id="list-important">
+      <li>Precios por persona en Dólares Americanos (USD).</li>
+      <li>Tarifas sujetas a disponibilidad y cambio sin previo aviso.</li>
+      <li>Vigencia: Enero a Septiembre 2026.</li>
+      <li>No incluye vuelos internacionales ni domésticos.</li>
+      <li>Suplementos por temporadas altas aplican según fechas.</li>
+      <li>Hoteles previstos o similares según categoría seleccionada.</li>
+      <li>Consultar precios para otras ocupaciones: Sencilla desde $2,705 USD, Triple desde $1,750 USD.</li>
+      <li>Consultar términos, condiciones y requisitos de entrada con tu asesor.</li>
+    </ul>
+    </p>
+  </div>
+</section>
+
+  <!-- Incluye/No Incluye -->
+  <section class="incluye">
+    <h2 class="section-title">Cobertura del Paquete</h2>
+    <div class="destinos-grid">
+      <div class="destino">
+        <div class="destino-header">
+          <div class="icon"><i class="fas fa-check-circle"></i></div>
+          <h3>Incluye</h3>
+        </div>
+        <ul>
+          <li><i class="fas fa-check"></i> Traslados privados en Santiago y Buenos Aires</li>
+          <li><i class="fas fa-check"></i> Traslados regulares en otras ciudades</li>
+          <li><i class="fas fa-check"></i> 9 noches de alojamiento con desayuno</li>
+          <li><i class="fas fa-check"></i> Visitas regulares en cada destino</li>
+          <li><i class="fas fa-check"></i> Cruce de Lagos Puerto Varas - Bariloche</li>
+          <li><i class="fas fa-check"></i> City tours en Santiago y Buenos Aires</li>
+          <li><i class="fas fa-check"></i> Excursión a Valparaíso y Viña del Mar</li>
+          <li><i class="fas fa-check"></i> Circuito Chico en Bariloche</li>
+        </ul>
+      </div>
+
+      <div class="destino">
+        <div class="destino-header">
+          <div class="icon"><i class="fas fa-times-circle"></i></div>
+          <h3>No Incluye</h3>
+        </div>
+        <ul>
+          <li><i class="fas fa-times"></i> Vuelos internacionales</li>
+          <li><i class="fas fa-times"></i> Vuelos domésticos (Santiago-Puerto Montt, Bariloche-Buenos Aires)</li>
+          <li><i class="fas fa-times"></i> Alimentos no mencionados</li>
+          <li><i class="fas fa-times"></i> Bebidas</li>
+          <li><i class="fas fa-times"></i> Propinas a guías y choferes</li>
+          <li><i class="fas fa-times"></i> Gastos personales</li>
+          <li><i class="fas fa-times"></i> Tasas ecoturísticas (Bariloche y Buenos Aires)</li>
+          <li><i class="fas fa-times"></i> Medios de elevación (aerosilla Bariloche)</li>
+          <li><i class="fas fa-times"></i> Seguro de viaje (recomendado)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Otros Destinos -->
+  <section class="destinations" id="destinos">
+    <h2 class="section-title">Otros Destinos</h2>
+    <div class="destinations-grid">
+      <a href="https://lacasadelviaje.com.mx/viaje/de-chihuahua-a-los-mochis-bdc/" class="destination-card"
+        target="_blank" rel="noopener noreferrer">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/01/BARRANCAS-4-990x490.jpeg"
+          alt="De Chihuahua a Los Mochis" loading="lazy" width="990" height="490">
+        <div class="destination-info">
+          <h3>De Chihuahua a Los Mochis-BDC</h3>
+          <div class="destination-meta">
+            <p class="meta-item"><i class="fas fa-map-marker-alt"></i> México</p>
+            <p class="meta-item"><i class="far fa-clock"></i> 7 Días - 6 Noches</p>
+          </div>
+          <p class="destination-route">Chihuahua – Creel – Divisadero Barrancas – Bahuichivo – El Fuerte – Los Mochis
+          </p>
+        </div>
+      </a>
+
+      <a href="https://lacasadelviaje.com.mx/viaje/el-chepe-por-barrancas-del-cobre/" class="destination-card"
+        target="_blank" rel="noopener noreferrer">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/01/BARRANCAS-5-990x490.jpg"
+          alt="El Chepe por Barrancas del Cobre" loading="lazy" width="990" height="490">
+        <div class="destination-info">
+          <h3>El Chepe por Barrancas del Cobre</h3>
+          <div class="destination-meta">
+            <p class="meta-item"><i class="fas fa-map-marker-alt"></i> México</p>
+            <p class="meta-item"><i class="far fa-clock"></i> 5 Días - 4 Noches</p>
+          </div>
+          <p class="destination-route">Chihuahua – Creel – Posada Barrancas – Los Mochis</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Reseñas (puedes mantener las mismas) -->
+  <section class="reviews" id="testimonios">
+    <h2 class="section-title">Reseñas de Nuestros Clientes</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">
+      Lo que dicen nuestros viajeros en Google
+    </p>
+
+    <div class="swiper reviewsSwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Oscar Alex" loading="lazy" width="60"
+                height="60">
+              <div>
+                <h4>Oscar Alex</h4>
+                <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>
+              Muy agradable, atención muy profesional, apoyo en todo momento tanto al iniciar el viaje como en todos los
+              traslados. Están muy al pendiente hasta el final de tu destino. Si tienes dudas te contestan rápido y te
+              dan asesoría inmediata. Los recomiendo ampliamente y volveré a La Casa del Viaje.
+            </p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Eduardo Hernández" loading="lazy"
+                width="60" height="60">
+              <div>
+                <h4>Eduardo Hernández</h4>
+                <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>
+              Excelente atención y servicio, siempre en contacto y asesorando en todo momento. ¡100% recomendable!
+            </p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Steph Terron" loading="lazy" width="60"
+                height="60">
+              <div>
+                <h4>Steph Terron</h4>
+                <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>
+              Fue una grata experiencia en general. Si bien previo al viaje tuvimos algunas dudas, durante el mismo todo
+              fue conforme a lo que nos ofrecieron. El guía se robó nuestro corazón y tuvimos la fortuna de compartir
+              con un buen grupo de viajeros.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-btn">
+      <a href="https://www.google.com/maps/place/La+Casa+Del+Viaje" target="_blank" rel="noopener noreferrer"
+        class="google-btn">
+        Ver más reseñas en Google
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer (mantener igual) -->
+  <footer class="footer">
+    <div class="footer-top">
+      <h2>Somos miembros de:</h2>
+      <div class="footer-logos">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2024/10/logo-gma.png" alt="GMA" loading="lazy"
+          width="155" height="auto">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2024/10/confetur.png" alt="Confetur" loading="lazy"
+          width="155" height="auto">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2024/10/agencia-de-viajes.png"
+          alt="Agencia de Viajes" loading="lazy" width="155" height="auto">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2024/10/metro.png" alt="Metro" loading="lazy"
+          width="155" height="auto">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2024/11/verifica-y-viaja-1.png"
+          alt="Verifica y Viaja" loading="lazy" width="155" height="auto">
+        <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/01/TXT-AVISO-DE-PRIVACIDAD-1024x364-1.png"
+          alt="Aviso de Privacidad" loading="lazy" width="155" height="auto">
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.facebook.com/casadelviaje" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/la-casa-del-viaje-operadora-mayorista/" target="_blank"
+          rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.youtube.com/c/LaCasadelViajeYT" target="_blank" rel="noopener noreferrer"
+          aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/lacasadelviaje_mexico/" target="_blank" rel="noopener noreferrer"
+          aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@lacasadelviajeoficial" target="_blank" rel="noopener noreferrer"
+          aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+      <p>© Copyright 2024 <strong>LA CASA DEL VIAJE</strong>, NUESTRA CASA ES EL MUNDO.</p>
+    </div>
+  </footer>
+
+  <!-- Botón Flotante de Reserva -->
+  <button class="btn-reservar-flotante" id="btnReservar" aria-label="Abrir formulario de reserva">
+    <i class="fas fa-calendar-check"></i>
+    <span>Reservar</span>
+  </button>
+
+  <!-- Modal del Formulario -->
+  <div class="modal-overlay" id="modalReserva" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-container">
+      <button class="modal-close" id="btnCerrarModal" aria-label="Cerrar modal">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="modal-header">
+        <h2 id="modalTitle">Reserva tu Aventura</h2>
+        <p>Completa el formulario y te contactaremos en menos de 24 horas</p>
+      </div>
+
+      <div class="modal-body">
+        <!-- coneccion form-7 -->
+        <?php
+            echo do_shortcode( '[contact-form-7 id="888bb7a" title="Modal-Barrancas-del-cobre"]' );
+		?>
+      </div>
+
+      <div class="modal-footer">
+        <p><i class="fas fa-shield-alt"></i> Tus datos están seguros con nosotros</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+
+  <!-- Configuración global (primero) -->
+  <script src="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/js/config-global.js"></script>
+
+  <!-- Funcionalidades principales -->
+  <script src="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/js/main.js"></script>
+  
+  <?php wp_footer(); ?>
+  
+</body>
+
+</html>
