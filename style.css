@@ -3332,9 +3332,6 @@ section {
 }
 
 @media (min-width: 1024px) {
-  .experience-grid-2x4 {
-    height: 600px;
-  }
   
   .grid-item-content i {
     font-size: 3rem;
@@ -3346,9 +3343,6 @@ section {
 }
 
 @media (min-width: 1440px) {
-  .experience-grid-2x4 {
-    height: 700px;
-  }
   
   .grid-item-content i {
     font-size: 3.5rem;
