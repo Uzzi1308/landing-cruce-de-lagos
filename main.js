@@ -270,3 +270,380 @@ if (document.readyState === 'loading') {
 }
 
 
+
+// CARRUSEL INFINITO OPTIMIZADO
+// Reemplaza tu sección de itinerario actual manteniendo el mismo diseño
+// Este código duplica las tarjetas dinámicamente en lugar de tenerlas hardcodeadas
+
+// ====================================
+// CONFIGURACIÓN
+// ====================================
+const CAROUSEL_CONFIG = {
+  slideWidth: 300, // Ancho de cada slide en px
+  gap: 0,          // Espacio entre slides
+  animationSpeed: 60, // Duración en segundos
+  slideWidthMobile: 250,
+  slideWidthTablet: 280
+};
+
+// ====================================
+// DATOS DE LOS DÍAS (Solo una vez)
+// ====================================
+const itineraryDays = [
+  {
+    day: 1,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png',
+    title: 'Santiago de Chile',
+    activities: [
+      'Arribo, asistencia y recepción por nuestro personal en el aeropuerto internacional.',
+      'Traslado en servicio privado al hotel.',
+      'Resto del día libre para descansar o explorar por tu cuenta.',
+      'Alojamiento en Santiago.'
+    ]
+  },
+  {
+    day: 2,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png',
+    title: 'Santiago de Chile',
+    activities: [
+      'Desayuno en el hotel.',
+      'Visita de la ciudad en tour regular: Palacio de la Moneda, Plaza de Armas, Cerro Santa Lucía.',
+      'Recorrido por el Barrio Lastarria y Bellavista.',
+      'Visita a las comunas modernas de Providencia, Las Condes y Vitacura.',
+      'Tarde libre para actividades personales.',
+      'Alojamiento en Santiago.'
+    ]
+  },
+  {
+    day: 3,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png',
+    title: 'Santiago – Valparaíso – Viña del Mar',
+    activities: [
+      'Desayuno en el hotel.',
+      'Salida hacia la costa para visitar Valparaíso, ciudad patrimonial de la humanidad.',
+      'Subida en ascensor tradicional, paseo por cerros Alegre y Concepción.',
+      'Visita a La Sebastiana, casa-museo de Pablo Neruda.',
+      'Continuación a Viña del Mar: Casino, avenidas costeras y playa de Reñaca.',
+      'Regreso a Santiago. Alojamiento.'
+    ]
+  },
+  {
+    day: 4,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png',
+    title: 'Santiago – Puerto Montt – Puerto Varas',
+    activities: [
+      'Desayuno en el hotel.',
+      'Traslado al aeropuerto para vuelo a Puerto Montt (no incluido).',
+      'Llegada a Puerto Montt, asistencia y traslado a Puerto Varas.',
+      'Resto del día libre en la "Ciudad de las Rosas".',
+      'Vistas espectaculares del volcán Osorno y lago Llanquihue.',
+      'Alojamiento en Puerto Varas.'
+    ]
+  },
+  {
+    day: 5,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png',
+    title: 'Cruce Internacional de Lagos',
+    activities: [
+      'Desayuno en el hotel.',
+      'Salida desde Puerto Varas hacia Petrohué, bordeando el Lago Llanquihue.',
+      'Navegación por Lago Todos los Santos hasta Peulla.',
+      'Cruce de la Cordillera de los Andes en bus y navegación por Lago Frías.',
+      'Navegación final por Lago Nahuel Huapi hasta Puerto Pañuelo.',
+      'Traslado a Bariloche. Alojamiento.'
+    ]
+  },
+  {
+    day: 6,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png',
+    title: 'Bariloche - Circuito Chico',
+    activities: [
+      'Desayuno en el hotel.',
+      'Excursión Circuito Chico: Av. Bustillo, Playa Bonita, cerro Campanario.',
+      'Visita a península Llao Llao, hotel Llao Llao y capilla San Eduardo.',
+      'Vistas panorámicas del lago Nahuel Huapi y lago Moreno.',
+      'Tarde libre en Bariloche para disfrutar de chocolates y cervezas artesanales.',
+      'Alojamiento en Bariloche.'
+    ]
+  },
+  {
+    day: 7,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png',
+    title: 'Bariloche – Buenos Aires',
+    activities: [
+      'Desayuno en el hotel.',
+      'Traslado al aeropuerto para vuelo a Buenos Aires (no incluido).',
+      'Arribo a la capital argentina, asistencia y traslado al hotel.',
+      'Tarde libre para primer contacto con la ciudad.',
+      'Recomendación: paseo por Puerto Madero al atardecer.',
+      'Alojamiento en Buenos Aires.'
+    ]
+  },
+  {
+    day: 8,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png',
+    title: 'Buenos Aires',
+    activities: [
+      'Desayuno en el hotel.',
+      'Visita de la ciudad: Plaza de Mayo, Casa Rosada, Catedral.',
+      'Recorrido por San Telmo, La Boca y Caminito.',
+      'Visita a Puerto Madero, Recoleta y Palermo.',
+      'Tarde libre para compras o actividades opcionales.',
+      'Noche: sugerencia opcional de cena con espectáculo de tango.',
+      'Alojamiento en Buenos Aires.'
+    ]
+  },
+  {
+    day: 9,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png',
+    title: 'Buenos Aires - Día Libre',
+    activities: [
+      'Desayuno en el hotel.',
+      'Día libre para actividades personales.',
+      'Opciones recomendadas: Excursión al Tigre y Delta del Paraná.',
+      'Otra opción: día de campo en estancia típica argentina.',
+      'O simplemente explorar barrios como Palermo Soho, Belgrano o Núñez.',
+      'Última noche en la capital argentina. Alojamiento.'
+    ]
+  },
+  {
+    day: 10,
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png',
+    title: 'Buenos Aires - Regreso',
+    activities: [
+      'Desayuno en el hotel.',
+      'Mañana libre para últimas compras o paseos.',
+      'A la hora convenida, traslado al aeropuerto internacional.',
+      'Fin de nuestros servicios.',
+      'Regreso a casa con experiencias inolvidables de Chile y Argentina.'
+    ]
+  }
+];
+
+// ====================================
+// FUNCIÓN PARA CREAR HTML DE UN SLIDE
+// ====================================
+function createSlideHTML(day) {
+  return `
+    <div class="infinite-slide">
+      <div class="slide-image">
+        <img src="${day.image}" alt="${day.title}" loading="lazy">
+        <div class="day-overlay">Día ${day.day}</div>
+      </div>
+      <div class="slide-info">
+        <h3>${day.title}</h3>
+        <ul>
+          ${day.activities.map(activity => `<li>${activity}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+// ====================================
+// INICIALIZACIÓN DEL CARRUSEL
+// ====================================
+function initInfiniteCarousel() {
+  const track = document.querySelector('.infinite-carousel-track');
+  
+  if (!track) {
+    console.error('No se encontró .infinite-carousel-track');
+    return;
+  }
+
+  // Limpiar contenido existente
+  track.innerHTML = '';
+
+  // Crear slides originales
+  const originalSlides = itineraryDays.map(day => createSlideHTML(day)).join('');
+  
+  // Duplicar para efecto infinito (3 copias es suficiente)
+  track.innerHTML = originalSlides + originalSlides + originalSlides;
+
+  // Configurar ancho del slide según viewport
+  updateSlideWidth();
+
+  // Calcular duración de animación basada en cantidad de slides
+  const totalSlides = itineraryDays.length;
+  const slideWidth = getSlideWidth();
+  const totalWidth = slideWidth * totalSlides;
+  
+  // Ajustar animación CSS dinámicamente
+  updateAnimationKeyframes(slideWidth, totalSlides);
+  
+  console.log(`✅ Carrusel optimizado: ${totalSlides} días originales, ${totalSlides * 3} slides totales`);
+}
+
+// ====================================
+// FUNCIÓN PARA OBTENER ANCHO DE SLIDE
+// ====================================
+function getSlideWidth() {
+  if (window.innerWidth <= 480) {
+    return CAROUSEL_CONFIG.slideWidthMobile;
+  } else if (window.innerWidth <= 768) {
+    return CAROUSEL_CONFIG.slideWidthTablet;
+  }
+  return CAROUSEL_CONFIG.slideWidth;
+}
+
+// ====================================
+// ACTUALIZAR ANCHO DE SLIDES
+// ====================================
+function updateSlideWidth() {
+  const slides = document.querySelectorAll('.infinite-slide');
+  const width = getSlideWidth();
+  
+  slides.forEach(slide => {
+    slide.style.width = `${width}px`;
+    slide.style.height = `${width < 250 ? 320 : width < 280 ? 350 : 400}px`;
+  });
+}
+
+// ====================================
+// ACTUALIZAR KEYFRAMES DE ANIMACIÓN
+// ====================================
+function updateAnimationKeyframes(slideWidth, totalSlides) {
+  const totalDistance = slideWidth * totalSlides;
+  
+  // Remover keyframe anterior si existe
+  const styleSheet = document.styleSheets[0];
+  for (let i = styleSheet.cssRules.length - 1; i >= 0; i--) {
+    const rule = styleSheet.cssRules[i];
+    if (rule.name === 'infinite-scroll') {
+      styleSheet.deleteRule(i);
+      break;
+    }
+  }
+  
+  // Crear nuevo keyframe
+  const keyframes = `
+    @keyframes infinite-scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-${totalDistance}px);
+      }
+    }
+  `;
+  
+  styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+  
+  // Aplicar animación al track
+  const track = document.querySelector('.infinite-carousel-track');
+  track.style.animation = `infinite-scroll ${CAROUSEL_CONFIG.animationSpeed}s linear infinite`;
+}
+
+// ====================================
+// OPTIMIZACIÓN: LAZY LOADING INTELIGENTE
+// ====================================
+function setupLazyLoading() {
+  const images = document.querySelectorAll('.infinite-slide img');
+  
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px' // Cargar 50px antes de que sea visible
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+  }
+}
+
+// ====================================
+// PAUSAR ANIMACIÓN AL HACER HOVER
+// ====================================
+function setupHoverPause() {
+  const container = document.querySelector('.infinite-carousel-container');
+  const track = document.querySelector('.infinite-carousel-track');
+  
+  if (container && track) {
+    container.addEventListener('mouseenter', () => {
+      track.style.animationPlayState = 'paused';
+    });
+    
+    container.addEventListener('mouseleave', () => {
+      track.style.animationPlayState = 'running';
+    });
+  }
+}
+
+// ====================================
+// RESPONSIVE: RECALCULAR EN RESIZE
+// ====================================
+let resizeTimer;
+function handleResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    updateSlideWidth();
+    const slideWidth = getSlideWidth();
+    updateAnimationKeyframes(slideWidth, itineraryDays.length);
+  }, 250); // Debounce de 250ms
+}
+
+// ====================================
+// INICIALIZACIÓN COMPLETA
+// ====================================
+function initOptimizedCarousel() {
+  // Esperar a que el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+  function init() {
+    initInfiniteCarousel();
+    setupLazyLoading();
+    setupHoverPause();
+    
+    // Listener para resize
+    window.addEventListener('resize', handleResize);
+    
+    console.log('🎨 Carrusel infinito optimizado inicializado correctamente');
+  }
+}
+
+// ====================================
+// EJECUTAR
+// ====================================
+initOptimizedCarousel();
+
+// ====================================
+// CLEANUP (opcional - para SPAs)
+// ====================================
+function destroyCarousel() {
+  window.removeEventListener('resize', handleResize);
+  const container = document.querySelector('.infinite-carousel-container');
+  if (container) {
+    container.removeEventListener('mouseenter', () => {});
+    container.removeEventListener('mouseleave', () => {});
+  }
+  console.log('🧹 Carrusel destruido');
+}
+
+// Exportar para uso en otros scripts si es necesario
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { initOptimizedCarousel, destroyCarousel };
+}
+
+
+
+
+
+
+
+
+
+
+
