@@ -3928,16 +3928,16 @@ section {
         animation: none;
       }
     }
-/* tips-section.css - VERSIÓN ULTRA COMPACTA */
+/* tips-section.css - VERSIÓN CON ORDEN DE FILAS MODIFICADO */
 
+/* Estilos base de la sección */
 .tips-section {
   position: relative;
-  padding: 1.5rem 0.75rem; /* Reducido drásticamente */
+  padding: 1.5rem 0.75rem;
   min-height: auto;
   overflow: hidden;
 }
 
-/* Fondo grande con overlay */
 .tips-background {
   position: absolute;
   top: 0;
@@ -3969,17 +3969,16 @@ section {
   );
 }
 
-/* Contenido sobre el fondo */
 .tips-content {
   position: relative;
   z-index: 1;
-  max-width: 1100px; /* Más compacto */
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 1.5rem; /* Reducido significativamente */
+  margin-bottom: 1.5rem;
 }
 
 .section-title {
@@ -3993,26 +3992,27 @@ section {
 
 .section-subtitle {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.8rem; /* Más pequeño */
+  font-size: 0.8rem;
   font-weight: 300;
-  letter-spacing: 1px; /* Reducido */
+  letter-spacing: 1px;
 }
 
-/* Grid de Mosaico ultra compacto */
+/* Mosaico - DISPOSICIÓN GRID (9 elementos) */
 .tips-mosaic {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.5rem; /* Gap reducido */
-  padding: 0 0.25rem; /* Padding reducido */
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 16px;
+  grid-auto-flow: dense;
 }
 
-/* Items del mosaico más compactos */
+/* Estilos visuales de los items */
 .mosaic-item {
   position: relative;
   border-radius: 0;
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Sombra más sutil */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .mosaic-item:hover {
@@ -4020,7 +4020,6 @@ section {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
-/* Imagen simple */
 .mosaic-item.image-only img {
   width: 100%;
   height: 100%;
@@ -4030,20 +4029,19 @@ section {
 }
 
 .mosaic-item.image-only:hover img {
-  transform: scale(1.02); /* Zoom más sutil */
+  transform: scale(1.02);
   filter: brightness(1.03);
 }
 
-/* Tarjeta con Tip - ultra compacta */
 .mosaic-item.with-tip {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem; /* Padding reducido */
+  padding: 1rem;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(15px) saturate(160%);
   -webkit-backdrop-filter: blur(15px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Borde más sutil */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
 }
 
@@ -4059,247 +4057,151 @@ section {
 
 .tip-number {
   color: #CD1915;
-  font-size: 1.5rem; /* Reducido significativamente */
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 0.5rem; /* Reducido */
+  margin-bottom: 0.5rem;
   text-shadow: 0 1px 6px rgba(205, 25, 21, 0.4);
 }
 
 .tip-text {
   color: white;
-  font-size: 0.75rem; /* Texto más pequeño */
-  line-height: 1.4; /* Interlineado reducido */
-  text-align: left; /* Cambiado de justify a left para mejor legibilidad en textos cortos */
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: left;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   font-weight: 300;
 }
 
-/* Layout del grid según tu imagen - ALTURAS DRÁSTICAMENTE REDUCIDAS */
-@media (min-width: 992px) {
-  /* Fila 1 */
-  .mosaic-item:nth-child(1) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 180px; /* Altura reducida en más del 35% */
-  }
-  .mosaic-item:nth-child(2) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 90px; /* Altura reducida en más del 35% */
-  }
-  .mosaic-item:nth-child(3) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 90px; /* Altura reducida en más del 35% */
-  }
-  
-  /* Fila 2 */
-  .mosaic-item:nth-child(4) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 90px; /* Altura reducida en más del 35% */
-  }
-  .mosaic-item:nth-child(5) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 90px; /* Altura reducida en más del 35% */
-  }
-  .mosaic-item:nth-child(6) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 180px; /* Altura reducida en más del 35% */
-  }
-  
-  /* Fila 3 */
-  .mosaic-item:nth-child(7) { 
-    grid-column: span 3; 
-    grid-row: span 1; 
-    min-height: 90px; /* Altura reducida en más del 35% */
-  }
-  
-  /* Fila 4 */
-  .mosaic-item:nth-child(8) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 90px; /* Altura reducida en más del 35% */
-  }
-  .mosaic-item:nth-child(9) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 180px; /* Altura reducida en más del 35% */
-  }
-  .mosaic-item:nth-child(10) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 90px; /* Altura reducida en más del 35% */
-  }
+/* CAMBIOS EN LA DISTRIBUCIÓN GRID - ORDEN MODIFICADO */
+
+/* Fila 1: TIP - Imagen - Imagen */
+.mosaic-item.with-tip:nth-child(1) {   /* TIP 1 */
+  grid-column: span 2;  /* Ocupa 2 columnas */
+  grid-row: 1;          /* Fila 1 */
 }
 
-/* Tablet - version ultra compacta */
-@media (min-width: 768px) and (max-width: 991px) {
+.mosaic-item.image-only:nth-child(2) {  /* Imagen 2 */
+  grid-column: 3;       /* Columna 3 */
+  grid-row: 1;          /* Fila 1 */
+}
+
+.mosaic-item.image-only:nth-child(3) {  /* Imagen 3 */
+  grid-column: 4;       /* Columna 4 */
+  grid-row: 1;          /* Fila 1 */
+}
+
+/* Fila 2: Imagen - TIP - Imagen */
+.mosaic-item.image-only:nth-child(4) {  /* Imagen 4 */
+  grid-column: 1;       /* Columna 1 */
+  grid-row: 2;          /* Fila 2 */
+}
+
+.mosaic-item.with-tip:nth-child(6) {   /* TIP 2 */
+  grid-column: 2 / span 2;  /* Comienza en columna 2, ocupa 2 columnas */
+  grid-row: 2;          /* Fila 2 */
+}
+
+.mosaic-item.image-only:nth-child(5) {  /* Imagen 5 */
+  grid-column: 4;       /* Columna 4 */
+  grid-row: 2;          /* Fila 2 */
+}
+
+/* Fila 3: Imagen - Imagen - TIP */
+.mosaic-item.image-only:nth-child(7) {  /* Imagen 7 */
+  grid-column: 1;       /* Columna 1 */
+  grid-row: 3;          /* Fila 3 */
+}
+
+.mosaic-item.image-only:nth-child(9) {  /* Imagen 9 */
+  grid-column: 2;       /* Columna 2 */
+  grid-row: 3;          /* Fila 3 */
+}
+
+.mosaic-item.with-tip:nth-child(8) {   /* TIP 3 */
+  grid-column: 3 / span 2;  /* Comienza en columna 3, ocupa 2 columnas */
+  grid-row: 3;          /* Fila 3 */
+}
+
+/* RESPONSIVE - CON ORDEN MODIFICADO */
+
+/* Tablet (768px - 991px) */
+@media (max-width: 768px) {
   .tips-mosaic {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.4rem; /* Gap reducido */
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+    gap: 12px;
   }
-
-  .mosaic-item:nth-child(1) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 160px; /* Altura reducida */
+  
+  /* Reset grid positions for tablet */
+  .mosaic-item {
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
-  .mosaic-item:nth-child(2) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 80px; /* Altura reducida */
+  
+  .mosaic-item.with-tip {
+    grid-column: span 2;
+    min-height: 180px;
   }
-  .mosaic-item:nth-child(3) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 80px; /* Altura reducida */
-  }
-  .mosaic-item:nth-child(4) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 80px; /* Altura reducida */
-  }
-  .mosaic-item:nth-child(5) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 80px; /* Altura reducida */
-  }
-  .mosaic-item:nth-child(6) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 160px; /* Altura reducida */
-  }
-  .mosaic-item:nth-child(7) { 
-    grid-column: span 4; 
-    grid-row: span 1; 
-    min-height: 80px; /* Altura reducida */
-  }
-  .mosaic-item:nth-child(8) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 80px; /* Altura reducida */
-  }
-  .mosaic-item:nth-child(9) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 160px; /* Altura reducida */
-  }
-  .mosaic-item:nth-child(10) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 80px; /* Altura reducida */
+  
+  .section-title {
+    font-size: 1.8rem;
   }
 }
 
-/* Mobile - version ultra compacta */
-@media (max-width: 767px) {
+/* Mobile (480px - 767px) */
+@media (max-width: 480px) {
   .tips-section {
-    padding: 1rem 0.25rem; /* Mucho más compacto */
-    min-height: auto;
+    padding: 1rem 0.5rem;
   }
-
-  .section-title {
-    font-size: 1.5rem; /* Reducido */
-    letter-spacing: 2px; /* Reducido */
-    margin-bottom: 0.2rem;
-  }
-
-  .section-subtitle {
-    font-size: 0.7rem; /* Más pequeño */
-  }
-
+  
   .tips-mosaic {
     grid-template-columns: 1fr;
-    gap: 0.4rem; /* Gap reducido */
-    padding: 0 0.2rem; /* Padding reducido */
-  }
-
-  .mosaic-item {
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
-    min-height: 120px; /* Altura drásticamente reducida */
-  }
-
-  .mosaic-item.with-tip {
-    padding: 0.8rem; /* Padding reducido */
-    min-height: 140px; /* Altura drásticamente reducida */
-  }
-
-  .tip-number {
-    font-size: 1.3rem; /* Reducido */
-    margin-bottom: 0.4rem; /* Reducido */
-  }
-
-  .tip-text {
-    font-size: 0.7rem; /* Más pequeño */
-    line-height: 1.3; /* Reducido */
-  }
-}
-
-/* Opción alternativa: diseño en fila para pantallas grandes */
-@media (min-width: 1200px) {
-  .tips-mosaic {
-    grid-template-columns: repeat(10, 1fr); /* Más columnas para mejor distribución */
+    grid-auto-rows: 160px;
+    gap: 10px;
   }
   
-  /* Redistribución más eficiente del espacio */
-  .mosaic-item:nth-child(1) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 160px; /* Aún más compacto */
+  /* Reset grid positions for mobile */
+  .mosaic-item {
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
-  .mosaic-item:nth-child(2) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 80px;
-  }
-  .mosaic-item:nth-child(3) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 80px;
-  }
-  .mosaic-item:nth-child(4) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 80px;
-  }
-  .mosaic-item:nth-child(5) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 80px;
-  }
-  .mosaic-item:nth-child(6) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
+  
+  .mosaic-item.with-tip {
+    grid-column: span 1;
     min-height: 160px;
   }
-  .mosaic-item:nth-child(7) { 
-    grid-column: span 3; 
-    grid-row: span 1; 
-    min-height: 80px;
+  
+  .section-title {
+    font-size: 1.5rem;
   }
-  .mosaic-item:nth-child(8) { 
-    grid-column: span 2; 
-    grid-row: span 1; 
-    min-height: 80px;
-  }
-  .mosaic-item:nth-child(9) { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    min-height: 160px;
-  }
-  .mosaic-item:nth-child(10) { 
-    grid-column: span 1; 
-    grid-row: span 1; 
-    min-height: 80px;
+  
+  .section-subtitle {
+    font-size: 0.7rem;
   }
 }
 
-/* Animaciones de entrada más rápidas */
+/* Mobile muy pequeño (hasta 479px) */
+@media (max-width: 479px) {
+  .tips-mosaic {
+    grid-auto-rows: 140px;
+  }
+  
+  .mosaic-item.with-tip {
+    min-height: 140px;
+    padding: 0.8rem;
+  }
+  
+  .tip-number {
+    font-size: 1.3rem;
+  }
+  
+  .tip-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* Animaciones de entrada */
 .mosaic-item {
   animation: fadeInScale 0.6s ease forwards;
   opacity: 0;
@@ -4314,7 +4216,6 @@ section {
 .mosaic-item:nth-child(7) { animation-delay: 0.35s; }
 .mosaic-item:nth-child(8) { animation-delay: 0.4s; }
 .mosaic-item:nth-child(9) { animation-delay: 0.45s; }
-.mosaic-item:nth-child(10) { animation-delay: 0.5s; }
 
 @keyframes fadeInScale {
   from {
