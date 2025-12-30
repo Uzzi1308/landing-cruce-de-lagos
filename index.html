@@ -176,6 +176,118 @@ Template Name: Cruce de Lagos
   </div>
 </section>
 
+<!-- Sección del Recorrido Mejorada -->
+<section class="journey-section">
+  <h2 class="section-title">Recorrido de tu Aventura</h2>
+  <p class="section-subtitle">Descubre cada destino que visitarás en este viaje inolvidable</p>
+  
+  <div class="journey-container">
+    <!-- Mapa con línea recta y puntos -->
+    <div class="journey-map">
+      <!-- Línea recta entre marcadores y etiquetas -->
+      <svg class="journey-line" viewBox="0 0 1000 4" preserveAspectRatio="none">
+        <line class="dotted-line" 
+              x1="50" y1="2" 
+              x2="900" y2="2"
+              stroke="#CD1915" 
+              stroke-width="4"/>
+      </svg>
+      
+      <!-- Puntos del recorrido -->
+      <div class="journey-points">
+        <div class="point active" data-point="0" role="button" tabindex="0" aria-label="Santiago de Chile">
+          <div class="point-marker">
+            <i class="fas fa-city" aria-hidden="true"></i>
+          </div>
+          <div class="point-label">Santiago</div>
+        </div>
+        
+        <div class="point" data-point="1" role="button" tabindex="0" aria-label="Puerto Varas">
+          <div class="point-marker">
+            <i class="fas fa-mountain" aria-hidden="true"></i>
+          </div>
+          <div class="point-label">Puerto Varas</div>
+        </div>
+        
+        <div class="point" data-point="2" role="button" tabindex="0" aria-label="Cruce de Lagos">
+          <div class="point-marker">
+            <i class="fas fa-ship" aria-hidden="true"></i>
+          </div>
+          <div class="point-label">Cruce Lagos</div>
+        </div>
+        
+        <div class="point" data-point="3" role="button" tabindex="0" aria-label="San Carlos de Bariloche">
+          <div class="point-marker">
+            <i class="fas fa-tree" aria-hidden="true"></i>
+          </div>
+          <div class="point-label">Bariloche</div>
+        </div>
+        
+        <div class="point" data-point="4" role="button" tabindex="0" aria-label="Buenos Aires">
+          <div class="point-marker">
+            <i class="fas fa-landmark" aria-hidden="true"></i>
+          </div>
+          <div class="point-label">Buenos Aires</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Panel de información -->
+    <div class="journey-info">
+      <div class="info-header">
+        <h3 id="point-title">Santiago de Chile</h3>
+        <span class="point-days" id="point-days">Días 1-3</span>
+      </div>
+      
+      <div class="info-content">
+        <div class="info-image">
+          <img id="point-image" 
+               src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-chihuahua.png" 
+               alt="Santiago de Chile" 
+               loading="lazy" 
+               width="400" 
+               height="200">
+        </div>
+        
+        <div class="info-details" id="point-details">
+          <ul>
+            <li><i class="fas fa-check" aria-hidden="true"></i> City tour histórico y moderno</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i> Excursión a Valparaíso y Viña del Mar</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i> Alojamiento en hotel céntrico</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i> Visita Palacio de la Moneda</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i> Tour por barrios típicos</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="info-navigation">
+        <button class="nav-btn prev-btn" 
+                disabled 
+                aria-label="Destino anterior">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        
+        <div class="navigation-dots" role="tablist" aria-label="Navegación de destinos">
+          <span class="dot active" data-point="0" role="tab" tabindex="0" aria-label="Punto 1"></span>
+          <span class="dot" data-point="1" role="tab" tabindex="0" aria-label="Punto 2"></span>
+          <span class="dot" data-point="2" role="tab" tabindex="0" aria-label="Punto 3"></span>
+          <span class="dot" data-point="3" role="tab" tabindex="0" aria-label="Punto 4"></span>
+          <span class="dot" data-point="4" role="tab" tabindex="0" aria-label="Punto 5"></span>
+        </div>
+        
+        <button class="nav-btn next-btn" 
+                aria-label="Siguiente destino">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
   <!-- Sección del Mapa -->
   <section class="map-section">
     <h2 class="section-title">Recorrido de tu Aventura</h2>
@@ -355,7 +467,7 @@ Template Name: Cruce de Lagos
 
     </div>
     <div class="price-card">
-      <h3>H
+      <h3>HOTELES 5*</h3>
       <p class="subtext">desde:</p>
       <p class="price">$2,255 <span style="font-size: 0.8em;">USD</span></p>
       <!-- <p class="subtext">por persona</p> -->
@@ -421,7 +533,7 @@ Template Name: Cruce de Lagos
   </section>
 
   <!-- Otros Destinos -->
-  <section class="destinations" id="destinos">
+Z  <section class="destinations" id="destinos">
     <h2 class="section-title">Otros Destinos</h2>
     <div class="destinations-grid">
       <a href="https://lacasadelviaje.com.mx/viaje/patagonia-express/" class="destination-card"

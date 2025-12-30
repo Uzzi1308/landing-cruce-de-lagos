@@ -647,3 +647,183 @@ if (typeof module !== 'undefined' && module.exports) {
 
 
 
+// ====================================
+// SECCIÓN RECORRIDO INTERACTIVO
+// ====================================
+
+const initJourneySection = () => {
+  // Elementos del DOM
+  const points = document.querySelectorAll('.point');
+  const dots = document.querySelectorAll('.dot');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  const pointTitle = document.getElementById('point-title');
+  const pointDays = document.getElementById('point-days');
+  const pointImage = document.getElementById('point-image');
+  const pointDetails = document.getElementById('point-details');
+  
+  // Datos de cada punto
+  const pointData = [
+    {
+      title: "Santiago de Chile",
+      days: "Días 1-3",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-chihuahua.png",
+      details: `
+        <ul>
+          <li><i class="fas fa-check"></i> City tour histórico y moderno</li>
+          <li><i class="fas fa-check"></i> Excursión a Valparaíso y Viña del Mar</li>
+          <li><i class="fas fa-check"></i> Alojamiento en hotel céntrico</li>
+          <li><i class="fas fa-check"></i> Visita Palacio de la Moneda</li>
+          <li><i class="fas fa-check"></i> Tour por barrios típicos</li>
+        </ul>
+      `
+    },
+    {
+      title: "Puerto Varas",
+      days: "Día 4",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-creel.png",
+      details: `
+        <ul>
+          <li><i class="fas fa-check"></i> Vistas al volcán Osorno</li>
+          <li><i class="fas fa-check"></i> Lago Llanquihue</li>
+          <li><i class="fas fa-check"></i> Punto inicio Cruce de Lagos</li>
+          <li><i class="fas fa-check"></i> La 'Ciudad de las Rosas'</li>
+          <li><i class="fas fa-check"></i> Descanso en la Patagonia chilena</li>
+        </ul>
+      `
+    },
+    {
+      title: "Cruce Internacional de Lagos",
+      days: "Día 5",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-divisadero.png",
+      details: `
+        <ul>
+          <li><i class="fas fa-check"></i> Cruce fronterizo más bello del mundo</li>
+          <li><i class="fas fa-check"></i> Navegación por Lago Todos los Santos</li>
+          <li><i class="fas fa-check"></i> Cruce de la Cordillera de los Andes</li>
+          <li><i class="fas fa-check"></i> De Chile a Argentina por lagos</li>
+          <li><i class="fas fa-check"></i> Paisajes espectaculares</li>
+        </ul>
+      `
+    },
+    {
+      title: "San Carlos de Bariloche",
+      days: "Día 6",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-fuerte.png",
+      details: `
+        <ul>
+          <li><i class="fas fa-check"></i> Circuito Chico incluido</li>
+          <li><i class="fas fa-check"></i> Lagos Nahuel Huapi y Moreno</li>
+          <li><i class="fas fa-check"></i> Capital del chocolate</li>
+          <li><i class="fas fa-check"></i> Cerro Campanario y vistas panorámicas</li>
+          <li><i class="fas fa-check"></i> Cervezas artesanales patagónicas</li>
+        </ul>
+      `
+    },
+    {
+      title: "Buenos Aires",
+      days: "Días 7-10",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-fuerte.png",
+      details: `
+        <ul>
+          <li><i class="fas fa-check"></i> City tour completo</li>
+          <li><i class="fas fa-check"></i> Barrios típicos: La Boca, San Telmo</li>
+          <li><i class="fas fa-check"></i> Opcional: show de tango</li>
+          <li><i class="fas fa-check"></i> Puerto Madero y Recoleta</li>
+          <li><i class="fas fa-check"></i> Fin del viaje inolvidable</li>
+        </ul>
+      `
+    }
+  ];
+  
+  let currentPoint = 0;
+  
+  // Función para actualizar la información
+  const updatePointInfo = (index) => {
+    // Validar índice
+    if (index < 0 || index >= pointData.length) return;
+    
+    // Actualizar datos
+    pointTitle.textContent = pointData[index].title;
+    pointDays.textContent = pointData[index].days;
+    pointImage.src = pointData[index].image;
+    pointImage.alt = pointData[index].title;
+    pointDetails.innerHTML = pointData[index].details;
+    
+    // Actualizar estado de botones
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === pointData.length - 1;
+    
+    // Actualizar puntos activos
+    points.forEach((point, i) => {
+      if (i === index) {
+        point.classList.add('active');
+      } else {
+        point.classList.remove('active');
+      }
+    });
+    
+    // Actualizar dots de navegación
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+    
+    currentPoint = index;
+  };
+  
+  // Event listeners para los puntos
+  points.forEach((point, index) => {
+    point.addEventListener('click', () => {
+      updatePointInfo(index);
+    });
+  });
+  
+  // Event listeners para los dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      updatePointInfo(index);
+    });
+  });
+  
+  // Event listeners para los botones de navegación
+  prevBtn.addEventListener('click', () => {
+    if (currentPoint > 0) {
+      updatePointInfo(currentPoint - 1);
+    }
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    if (currentPoint < pointData.length - 1) {
+      updatePointInfo(currentPoint + 1);
+    }
+  });
+  
+  // Navegación con teclado
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' && currentPoint > 0) {
+      updatePointInfo(currentPoint - 1);
+    } else if (e.key === 'ArrowRight' && currentPoint < pointData.length - 1) {
+      updatePointInfo(currentPoint + 1);
+    }
+  });
+  
+  // Inicializar con el primer punto
+  updatePointInfo(0);
+  
+  console.log('✅ Sección de recorrido inicializada');
+};
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initJourneySection);
+} else {
+  initJourneySection();
+}
+
+
+
+
