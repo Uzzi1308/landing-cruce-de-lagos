@@ -113,7 +113,7 @@ nav {
   display: none;
 }
 
-/* Ajuste para que el hero no quede detrás del navbar */
+/* Ajuste para que el hero no quede detrÃ¡s del navbar */
 .hero {
   padding-top: 70px;
 }
@@ -508,7 +508,7 @@ body > section.hero > div > div.form-container.visible > h3 > i {
 }
 
 .itinerary-content li::before {
-  content: "✓";
+  content: "âœ“";
   position: absolute;
   left: 0;
   color: var(--primary);
@@ -711,7 +711,7 @@ body > section.hero > div > div.form-container.visible > h3 > i {
 }
 
 .tooltip-list li::before {
-  content: "•";
+  content: "â€¢";
   position: absolute;
   left: 0;
   color: var(--secundary);
@@ -1312,7 +1312,7 @@ body > section.hero > div > div.form-container.visible > h3 > i {
   color: var(--primary);
 }
 
-/* BOTÓN FLOTANTE DE RESERVA */
+/* BOTÃ“N FLOTANTE DE RESERVA */
 .btn-reservar-flotante {
   position: fixed;
   top: 25%;
@@ -1380,7 +1380,7 @@ body > section.hero > div > div.form-container.visible > h3 > i {
   margin-left: 40px;
 }
 
-/* Animación de pulso */
+/* AnimaciÃ³n de pulso */
 @keyframes pulse {
   0%, 100% {
     box-shadow: 0 8px 25px rgba(205, 25, 21, 0.4);
@@ -1642,7 +1642,7 @@ body > section.hero > div > div.form-container.visible > h3 > i {
   color: #28a745;
 }
 
-/* VARIACIÓN: Botón inline para usar en cualquier parte */
+/* VARIACIÃ“N: BotÃ³n inline para usar en cualquier parte */
 .btn-reservar-inline {
   display: inline-flex;
   align-items: center;
@@ -1809,7 +1809,7 @@ body > section.hero > div > div.form-container.visible > h3 > i {
   display: none;
 }
 
-/* ESTILOS ESPECÍFICOS PARA EL MODAL */
+/* ESTILOS ESPECÃFICOS PARA EL MODAL */
 .modal-body .wpcf7-form input[type="text"],
 .modal-body .wpcf7-form input[type="email"],
 .modal-body .wpcf7-form input[type="tel"],
@@ -2722,7 +2722,7 @@ section {
 }
 
 /* ====================================
-   MOBILE EXTRA PEQUEÑO - 480px y menos
+   MOBILE EXTRA PEQUEÃ‘O - 480px y menos
    ==================================== */
 @media (max-width: 480px) {
 
@@ -3080,14 +3080,14 @@ section {
 }
 
 .slide-info li::before {
-  content: "✓";
+  content: "âœ“";
   position: absolute;
   left: 0;
   color: var(--primary);
   font-weight: bold;
 }
 
-/* Animación del carrusel infinito */
+/* AnimaciÃ³n del carrusel infinito */
 @keyframes infinite-scroll {
   0% {
     transform: translateX(0);
@@ -3097,7 +3097,7 @@ section {
   }
 }
 
-/* Pausar animación al hacer hover en el contenedor */
+/* Pausar animaciÃ³n al hacer hover en el contenedor */
 .infinite-carousel-container:hover .infinite-carousel-track {
   animation-play-state: paused;
 }
@@ -3180,7 +3180,7 @@ section {
 
 
 
-/* EXPERIENCE SECTION - CUADRÍCULA 2x4 OPTIMIZADA */
+/* EXPERIENCE SECTION - CUADRÃCULA 2x4 OPTIMIZADA */
 .experience-grid-2x4 {
   display: grid;
   grid-template-columns: 1fr 1fr; /* 2 columnas */
@@ -3192,7 +3192,7 @@ section {
   margin-top: 2rem;
 }
 
-/* Definición exacta de áreas usando grid-area */
+/* DefiniciÃ³n exacta de Ã¡reas usando grid-area */
 .grid-item-1 {
   /* Color 1: fila 1, col 1, ocupa 1x1 */
   grid-area: 1 / 1 / 2 / 2;
@@ -3225,7 +3225,7 @@ section {
   transition: transform 0.3s ease;
 }
 
-/* Elementos de color sólido */
+/* Elementos de color sÃ³lido */
 .grid-item.color-item {
   color: white;
   padding: 1.5rem;
@@ -3240,7 +3240,7 @@ section {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Elementos con imagen - Las imágenes son más altas automáticamente por grid-area */
+/* Elementos con imagen - Las imÃ¡genes son mÃ¡s altas automÃ¡ticamente por grid-area */
 .grid-item.image-item {
   transition: transform 0.3s ease;
 }
@@ -3314,7 +3314,7 @@ section {
     gap: 0.8rem;
   }
   
-  /* En móvil, resetear todas las posiciones de grid */
+  /* En mÃ³vil, resetear todas las posiciones de grid */
   .grid-item-1,
   .grid-item-2,
   .grid-item-3,
@@ -3364,7 +3364,7 @@ section {
 
 
     /* ====================================
-       SECCIÓN RECORRIDO MEJORADA
+       SECCIÃ“N RECORRIDO MEJORADA
        ==================================== */
     .journey-section {
       padding: 4rem 1rem;
@@ -3431,7 +3431,7 @@ section {
       }
     }
 
-    /* Línea SVG - Posición relativa para mejor control */
+    /* LÃ­nea SVG - PosiciÃ³n relativa para mejor control */
     .journey-line {
       width: 100%;
       height: 4px;
@@ -3587,7 +3587,7 @@ section {
     }
 
     /* ====================================
-       PANEL DE INFORMACIÓN
+       PANEL DE INFORMACIÃ“N
        ==================================== */
     .journey-info {
       background: white;
@@ -3726,7 +3726,7 @@ section {
     }
 
     /* ====================================
-       NAVEGACIÓN
+       NAVEGACIÃ“N
        ==================================== */
     .info-navigation {
       display: flex;
@@ -3928,9 +3928,9 @@ section {
         animation: none;
       }
     }
-/* tips-section.css - VERSIÓN CON ORDEN DE FILAS MODIFICADO */
+/* tips-section.css - VERSIÃ“N CON ORDEN DE FILAS MODIFICADO */
 
-/* Estilos base de la sección */
+/* Estilos base de la secciÃ³n */
 .tips-section {
   position: relative;
   padding: 1.5rem 0.75rem;
@@ -3997,10 +3997,10 @@ section {
   letter-spacing: 1px;
 }
 
-/* Mosaico - DISPOSICIÓN GRID (9 elementos) */
+/* Mosaico - DISPOSICIÃ“N GRID (9 elementos) */
 .tips-mosaic {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-auto-rows: 200px;
   gap: 16px;
   grid-auto-flow: dense;
@@ -4073,34 +4073,33 @@ section {
   font-weight: 300;
 }
 
-/* CAMBIOS EN LA DISTRIBUCIÓN GRID - ORDEN MODIFICADO */
+/* CAMBIOS EN LA DISTRIBUCIÃ“N GRID - ORDEN MODIFICADO */
 
 /* Fila 1: TIP - Imagen - Imagen */
 .mosaic-item.with-tip:nth-child(1) {   /* TIP 1 */
-  grid-column: span 2;  /* Ocupa 2 columnas */
-  grid-row: 1;          /* Fila 1 */
+  grid-column: 3 / span 2;  /* Ocupa 2 columnas */
+  grid-row: 1 / span 2;          /* Fila 1 */
 }
 
 .mosaic-item.image-only:nth-child(2) {  /* Imagen 2 */
-  grid-column: 3;       /* Columna 3 */
+  grid-column: 5 / span 2;       /* Columna 3 */
   grid-row: 1;          /* Fila 1 */
 }
 
 .mosaic-item.image-only:nth-child(3) {  /* Imagen 3 */
-  grid-column: 4 / span 2;
-    grid-row: 1;
+  grid-column: 7 / span 2;
+  grid-row: 1;
 }
 
 /* Fila 2: Imagen - TIP - Imagen */
 .mosaic-item.image-only:nth-child(4) {  /* Imagen 4 */
-  grid-column: 1;       /* Columna 1 */
-  grid-row: 2;          /* Fila 2 */
+  grid-column: 1 /span 2;       /* Columna 1 */
+  grid-row: 1 / span 2;          /* Fila 2 */
 }
 
 .mosaic-item.with-tip:nth-child(6) {   /* TIP 2 */
-    grid-column: 2 / span 3;
+    grid-column: 6 / span 3;
     grid-row: 2;
-
 }
 
 .mosaic-item.image-only:nth-child(5) {  /* Imagen 5 */
@@ -4110,18 +4109,18 @@ section {
 
 /* Fila 3: Imagen - Imagen - TIP */
 .mosaic-item.image-only:nth-child(7) {  /* Imagen 7 */
-  grid-column: 1 / span 2;
-    grid-row: 3;
+  grid-column: 1 / span 3;
+  grid-row: 3;
 }
 
 .mosaic-item.image-only:nth-child(9) {  /* Imagen 9 */
-      grid-column: 3;
-    grid-row: 3;       /* Fila 3 */
+      grid-column: 7 / span 2;
+      grid-row: 3;       /* Fila 3 */
 }
 
 .mosaic-item.with-tip:nth-child(8) {   /* TIP 3 */
-     grid-column: 4 / span 2;
-    grid-row: 3;
+     grid-column: 4 / span 3;
+     grid-row: 3;
 }
 
 /* RESPONSIVE - CON ORDEN MODIFICADO */
@@ -4182,7 +4181,7 @@ section {
   }
 }
 
-/* Mobile muy pequeño (hasta 479px) */
+/* Mobile muy pequeÃ±o (hasta 479px) */
 @media (max-width: 479px) {
   .tips-mosaic {
     grid-auto-rows: 140px;
