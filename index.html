@@ -75,11 +75,40 @@ Template Name: Cruce de Lagos
         
         <!-- coneccion form-7 -->
         <?php
-			echo do_shortcode( '[contact-form-7 id="7876fa1" title="Home-Cruce-de-lagos_copy"]' );
+			echo do_shortcode( '[contact-form-7 id="78854f1" title="Home-Barrancas-del-cobre" ]' );
 		?>
 
 
+    <!-- FORMULARIO MODIFICADO - Solo 3 campos iniciales -->
+<form id="bookingForm">
+  <!-- Campos principales (siempre visibles) -->
+  <div class="form-group">
+    <label><i class="fas fa-user"></i> Nombre Completo</label>
+    <input type="text" required placeholder="Nombre y Apellidos" name="nombre" autocomplete="name" class="form-input-trigger">
+  </div>
+  <div class="form-group">
+    <label><i class="fas fa-envelope"></i> Email</label>
+    <input type="email" required placeholder="tu@email.com" name="email" autocomplete="email" class="form-input-trigger">
+  </div>
+  <div class="form-group">
+    <label><i class="fas fa-phone"></i> Teléfono</label>
+    <input type="tel" required placeholder="(123) 456-7890" name="telefono" autocomplete="tel" class="form-input-trigger">
+  </div>
 
+  <!-- Campos adicionales (ocultos inicialmente) -->
+  <div class="additional-fields" id="additionalFields" style="display: none;">
+    <div class="form-group">
+      <label><i class="fas fa-users"></i> Número de Viajeros</label>
+      <select required name="viajeros">
+        <option value="">Selecciona</option>
+        <option value="1">1 persona</option>
+        <option value="2">2 personas</option>
+        <option value="3">3 personas</option>
+        <option value="4">4 personas</option>
+        <option value="5+">5+ personas</option>
+      </select>
+    </div>
+    
     <div class="form-group">
       <label><i class="fas fa-calendar-alt"></i> Fecha Estimada de Viaje</label>
       <input type="text" placeholder="Ej. Junio 2024" name="fecha" autocomplete="off">
@@ -312,58 +341,7 @@ Template Name: Cruce de Lagos
   </div>
 </section>
 
-  <h2 class="section-title">Consejos para tu Viaje</h2>
-  <!-- tips-->
-  <div class="featured-destinations">
-    <!-- clima -->
-    <div class="featured-card">
-      <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/tip-frio.png" alt="Clima" class="featured-image" loading="lazy" width="600"
-        height="400">
-      <div class="featured-content">
-        <div class="featured-header">
-          <div class="featured-icon">
-            <i class="fas fa-temperature-low"></i>
-          </div>
-          <h3>Ropa por capas y abrigadora.</h3>
-        </div>
-        <p>El clima patagónico es cambiante. Lleva ropa térmica, impermeable y calzado cómodo para trekking suave y navegación.</p>
-      </div>
-    </div>
 
-    <!-- documentos -->
-    <div class="featured-card">
-      <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/tip-calor.png" alt="Documentos" class="featured-image" loading="lazy" width="600" height="400">
-      <div class="featured-content">
-        <div class="featured-header">
-          <div class="featured-icon">
-            <i class="fas fa-passport"></i>
-          </div>
-          <h3>Documentos en regla.</h3>
-        </div>
-        <p>Pasaporte vigente (mínimo 6 meses). Para algunos países no se requiere visa, pero verifica según tu nacionalidad.</p>
-      </div>
-    </div>
-
-    <!-- salud -->
-    <div class="featured-card">
-      <img src="https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/tip-comida.png" alt="Salud" class="featured-image" loading="lazy" width="600" height="400">
-      <div class="featured-content">
-        <div class="featured-header">
-          <div class="featured-icon">
-            <i class="fas fa-heartbeat"></i>
-          </div>
-          <h3>Protección solar y medicamentos.</h3>
-        </div>
-        <p>El sol en altura es fuerte. Protector solar, lentes y gorra esenciales. Lleva tu botiquín personal y medicamentos recetados.</p>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-  <!-- tips-section.html -->
 <section class="tips-section">
   <!-- Fondo grande -->
   <div class="tips-background">
@@ -726,7 +704,7 @@ Z  <section class="destinations" id="destinos">
       <div class="modal-body">
         <!-- coneccion form-7 -->
         <?php
-            echo do_shortcode( '[contact-form-7 id="03fecfc" title="Modal-Cruce-de-lagos"]' );
+            echo do_shortcode( '[contact-form-7 id="888bb7a" title="Modal-Barrancas-del-cobre"]' );
 		?>
       </div>
 
