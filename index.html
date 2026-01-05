@@ -29,11 +29,11 @@ Template Name: Cruce de Lagos
 
   <!-- Preload CSS crítico -->
    <link rel="stylesheet" href="style.css">
-  <!-- <link rel="preload" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/css/style.css" as="style">
+  <!-- <link rel="preload" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_Cruce/css/style.css" as="style">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"> -->
 
   <!-- CSS -->
-  <!-- <link rel="stylesheet" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_barrancas/css/style.css"> -->
+  <!-- <link rel="stylesheet" href="https://lacasadelviaje.com.mx/wp-content/themes/travel-agency-pro/landing_Cruce/css/style.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -70,76 +70,76 @@ Template Name: Cruce de Lagos
         <h1>CRUCE DE LAGOS</h1>
         <p>10 días de aventura entre montañas, lagos y ciudades fascinantes.</p>
       </div>
-      <div class="form-container">
-        <h3><i class="fas fa-calendar-check"></i> Reserva tu Aventura</h3>
-        
-        <!-- coneccion form-7 -->
-        <?php
-			echo do_shortcode( '[contact-form-7 id="78854f1" title="Home-Barrancas-del-cobre" ]' );
-		?>
-
-
-    <!-- FORMULARIO MODIFICADO - Solo 3 campos iniciales -->
-<form id="bookingForm">
-  <!-- Campos principales (siempre visibles) -->
-  <div class="form-group">
-    <label><i class="fas fa-user"></i> Nombre Completo</label>
-    <input type="text" required placeholder="Nombre y Apellidos" name="nombre" autocomplete="name" class="form-input-trigger">
-  </div>
-  <div class="form-group">
-    <label><i class="fas fa-envelope"></i> Email</label>
-    <input type="email" required placeholder="tu@email.com" name="email" autocomplete="email" class="form-input-trigger">
-  </div>
-  <div class="form-group">
-    <label><i class="fas fa-phone"></i> Teléfono</label>
-    <input type="tel" required placeholder="(123) 456-7890" name="telefono" autocomplete="tel" class="form-input-trigger">
-  </div>
-
-  <!-- Campos adicionales (ocultos inicialmente) -->
-  <div class="additional-fields" id="additionalFields" style="display: none;">
+   <div class="form-container">
+  <h3><i class="fas fa-calendar-check"></i> Reserva tu Aventura</h3>
+  
+  <!-- CONEXIÓN FORM-7 (Para producción) -->
+  <?php if (defined('WPINC')) : ?>
+    <?php echo do_shortcode('[contact-form-7 id="78854f1" title="Home-Barrancas-del-cobre"]'); ?>
+  <?php else : ?>
+  
+  <!-- FORMULARIO LOCAL (Para desarrollo/estático) -->
+  <form id="bookingForm">
+    <!-- Campos principales (siempre visibles) -->
     <div class="form-group">
-      <label><i class="fas fa-users"></i> Número de Viajeros</label>
-      <select required name="viajeros">
-        <option value="">Selecciona</option>
-        <option value="1">1 persona</option>
-        <option value="2">2 personas</option>
-        <option value="3">3 personas</option>
-        <option value="4">4 personas</option>
-        <option value="5+">5+ personas</option>
-      </select>
+      <label><i class="fas fa-user"></i> Nombre Completo</label>
+      <input type="text" required placeholder="Nombre y Apellidos" name="nombre" autocomplete="name" class="form-input-trigger">
     </div>
-    
     <div class="form-group">
-      <label><i class="fas fa-calendar-alt"></i> Fecha Estimada de Viaje</label>
-      <input type="text" placeholder="Ej. Junio 2024" name="fecha" autocomplete="off">
+      <label><i class="fas fa-envelope"></i> Email</label>
+      <input type="email" required placeholder="tu@email.com" name="email" autocomplete="email" class="form-input-trigger">
     </div>
-    
     <div class="form-group">
-      <label><i class="fas fa-plane-departure"></i> Sale Desde</label>
-      <input type="text" placeholder="Ciudad de origen" name="origen" autocomplete="off">
+      <label><i class="fas fa-phone"></i> Teléfono</label>
+      <input type="tel" required placeholder="(123) 456-7890" name="telefono" autocomplete="tel" class="form-input-trigger">
     </div>
-    
-    <div class="form-group">
-      <label><i class="fas fa-child"></i> Menores de Edad</label>
-      <select name="menores">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3+</option>
-      </select>
-    </div>
-  </div>
 
-  <button type="submit" class="btn-submit-modal">
-    <i class="fas fa-paper-plane"></i>
-    Enviar Solicitud
-  </button>
-</form>
-        <div class="modal-footer">
-          <p><i class="fas fa-shield-alt"></i> Tus datos están seguros con nosotros</p>
-        </div>
+    <!-- Campos adicionales (ocultos inicialmente) -->
+    <div class="additional-fields" id="additionalFields" style="display: none;">
+      <div class="form-group">
+        <label><i class="fas fa-users"></i> Número de Viajeros</label>
+        <select required name="viajeros">
+          <option value="">Selecciona</option>
+          <option value="1">1 persona</option>
+          <option value="2">2 personas</option>
+          <option value="3">3 personas</option>
+          <option value="4">4 personas</option>
+          <option value="5+">5+ personas</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-calendar-alt"></i> Fecha Estimada de Viaje</label>
+        <input type="text" placeholder="Ej. Junio 2024" name="fecha" autocomplete="off">
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-plane-departure"></i> Sale Desde</label>
+        <input type="text" placeholder="Ciudad de origen" name="origen" autocomplete="off">
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-child"></i> Menores de Edad</label>
+        <select name="menores">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3+</option>
+        </select>
       </div>
     </div>
+
+    <button type="submit" class="btn-submit-modal">
+      <i class="fas fa-paper-plane"></i>
+      Enviar Solicitud
+    </button>
+  </form>
+  <?php endif; ?>
+  
+  <div class="modal-footer">
+    <p><i class="fas fa-shield-alt"></i> Tus datos están seguros con nosotros</p>
+  </div>
+</div>
   </section>
 
   <!-- Sección Experiencia - Cuadrícula 2x2 -->
@@ -523,7 +523,7 @@ Template Name: Cruce de Lagos
   </section>
 
   <!-- Otros Destinos -->
-Z  <section class="destinations" id="destinos">
+   <section class="destinations" id="destinos">
     <h2 class="section-title">Otros Destinos</h2>
     <div class="destinations-grid">
       <a href="https://lacasadelviaje.com.mx/viaje/patagonia-express/" class="destination-card"
@@ -701,12 +701,70 @@ Z  <section class="destinations" id="destinos">
         <p>Completa el formulario y te contactaremos en menos de 24 horas</p>
       </div>
 
-      <div class="modal-body">
-        <!-- coneccion form-7 -->
-        <?php
-            echo do_shortcode( '[contact-form-7 id="888bb7a" title="Modal-Barrancas-del-cobre"]' );
-		?>
+<div class="modal-body">
+  <!-- CONEXIÓN FORM-7 (Para producción) -->
+  <?php if (defined('WPINC')) : ?>
+    <?php echo do_shortcode('[contact-form-7 id="888bb7a" title="Modal-Barrancas-del-cobre"]'); ?>
+  <?php else : ?>
+  
+  <!-- FORMULARIO LOCAL (Para desarrollo/estático) -->
+  <form id="bookingFormModal">
+    <!-- Campos principales (siempre visibles) -->
+    <div class="form-group">
+      <label><i class="fas fa-user"></i> Nombre Completo</label>
+      <input type="text" required placeholder="Nombre y Apellidos" name="nombre" autocomplete="name" class="form-input-trigger">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-envelope"></i> Email</label>
+      <input type="email" required placeholder="tu@email.com" name="email" autocomplete="email" class="form-input-trigger">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-phone"></i> Teléfono</label>
+      <input type="tel" required placeholder="(123) 456-7890" name="telefono" autocomplete="tel" class="form-input-trigger">
+    </div>
+
+    <!-- Campos adicionales (visibles en modal) -->
+    <div class="additional-fields" id="modalAdditionalFields">
+      <div class="form-group">
+        <label><i class="fas fa-users"></i> Número de Viajeros</label>
+        <select required name="viajeros">
+          <option value="">Selecciona</option>
+          <option value="1">1 persona</option>
+          <option value="2">2 personas</option>
+          <option value="3">3 personas</option>
+          <option value="4">4 personas</option>
+          <option value="5+">5+ personas</option>
+        </select>
       </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-calendar-alt"></i> Fecha Estimada de Viaje</label>
+        <input type="text" placeholder="Ej. Junio 2024" name="fecha" autocomplete="off">
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-plane-departure"></i> Sale Desde</label>
+        <input type="text" placeholder="Ciudad de origen" name="origen" autocomplete="off">
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-child"></i> Menores de Edad</label>
+        <select name="menores">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3+</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit-modal">
+      <i class="fas fa-paper-plane"></i>
+      Enviar Solicitud
+    </button>
+  </form>
+  <?php endif; ?>
+</div>
 
       <div class="modal-footer">
         <p><i class="fas fa-shield-alt"></i> Tus datos están seguros con nosotros</p>
