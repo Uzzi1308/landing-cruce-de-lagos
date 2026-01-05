@@ -258,7 +258,8 @@ const init = () => {
   initPriceHover();
   initSmoothScroll();
   initMobileMenu();
-  
+  initDynamicForm();
+
   console.log('Página inicializada correctamente');
 };
 
@@ -824,6 +825,55 @@ if (document.readyState === 'loading') {
   initJourneySection();
 }
 
-
+// ====================================
+// FORMULARIO DINÁMICO - Campos expandibles
+// ====================================
+function initDynamicForm() {
+  const bookingForm = document.getElementById('bookingForm');
+  const additionalFields = document.getElementById('additionalFields');
+  
+  if (!bookingForm || !additionalFields) return;
+  
+  // Función para mostrar campos adicionales
+  function showAdditionalFields() {
+    if (additionalFields.style.display === 'none') {
+      additionalFields.style.display = 'block';
+      bookingForm.classList.add('expanded');
+      
+      // Desplazamiento suave al primer campo adicional
+      setTimeout(() => {
+        additionalFields.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'nearest' 
+        });
+      }, 300);
+    }
+  }
+  
+  // Event listeners para inputs principales
+  const triggerInputs = bookingForm.querySelectorAll('.form-input-trigger');
+  triggerInputs.forEach(input => {
+    input.addEventListener('click', showAdditionalFields);
+    input.addEventListener('focus', showAdditionalFields);
+    input.addEventListener('touchstart', showAdditionalFields, { passive: true });
+  });
+  
+  // También mostrar al hacer clic en cualquier parte del formulario
+  bookingForm.addEventListener('click', function(e) {
+    // Solo activar si el clic no es en el botón de submit
+    if (e.target.type !== 'submit' && e.target.className !== 'btn-submit-modal') {
+      showAdditionalFields();
+    }
+  });
+  
+  // Para móviles, también activar con toque
+  bookingForm.addEventListener('touchstart', function(e) {
+    if (e.target.type !== 'submit' && e.target.className !== 'btn-submit-modal') {
+      showAdditionalFields();
+    }
+  }, { passive: true });
+  
+  console.log('✅ Formulario dinámico inicializado');
+}
 
 

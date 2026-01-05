@@ -75,9 +75,37 @@ Template Name: Cruce de Lagos
         
         <!-- coneccion form-7 -->
         <?php
-			echo do_shortcode( '[contact-form-7 id="78854f1" title="Home-Barrancas-del-cobre" ]' );
+			echo do_shortcode( '[contact-form-7 id="7876fa1" title="Home-Cruce-de-lagos_copy"]' );
 		?>
 
+
+
+    <div class="form-group">
+      <label><i class="fas fa-calendar-alt"></i> Fecha Estimada de Viaje</label>
+      <input type="text" placeholder="Ej. Junio 2024" name="fecha" autocomplete="off">
+    </div>
+    
+    <div class="form-group">
+      <label><i class="fas fa-plane-departure"></i> Sale Desde</label>
+      <input type="text" placeholder="Ciudad de origen" name="origen" autocomplete="off">
+    </div>
+    
+    <div class="form-group">
+      <label><i class="fas fa-child"></i> Menores de Edad</label>
+      <select name="menores">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3+</option>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-submit-modal">
+    <i class="fas fa-paper-plane"></i>
+    Enviar Solicitud
+  </button>
+</form>
         <div class="modal-footer">
           <p><i class="fas fa-shield-alt"></i> Tus datos están seguros con nosotros</p>
         </div>
@@ -428,9 +456,10 @@ Template Name: Cruce de Lagos
 
 <!-- Sección de Precios -->
 <section class="precios">
-  <h2 class="section-title">Precios por Persona en USD</h2>
+  <h2 class="section-title">Precios por Persona</h2>
 
-  <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 1.5rem;">Habitación doble por persona</p>
+  <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: .5rem;">Habitación doble por persona</p>
+   <p style="text-align: center; color: #959595; font-size: 1.1rem; margin-bottom: 1.5rem;">*Consulta fechas y tarifas disponibles</p>
   <div class="price-grid">
     <div class="price-card">
       <h3>Turista</h3>
@@ -697,7 +726,7 @@ Z  <section class="destinations" id="destinos">
       <div class="modal-body">
         <!-- coneccion form-7 -->
         <?php
-            echo do_shortcode( '[contact-form-7 id="888bb7a" title="Modal-Barrancas-del-cobre"]' );
+            echo do_shortcode( '[contact-form-7 id="03fecfc" title="Modal-Cruce-de-lagos"]' );
 		?>
       </div>
 
