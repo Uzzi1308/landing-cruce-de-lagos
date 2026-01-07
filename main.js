@@ -257,7 +257,7 @@ function initDynamicForm() {
 const itineraryDays = [
   {
     day: 1,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-1.webp',
     title: 'Santiago de Chile',
     activities: [
       'Arribo, asistencia y recepción por nuestro personal en el aeropuerto internacional.',
@@ -268,7 +268,7 @@ const itineraryDays = [
   },
   {
     day: 2,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-2.webp',
     title: 'Santiago de Chile',
     activities: [
       'Desayuno en el hotel.',
@@ -279,7 +279,7 @@ const itineraryDays = [
   },
   {
     day: 3,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-3.webp',
     title: 'Santiago – Valparaíso – Viña del Mar',
     activities: [
       'Desayuno en el hotel.',
@@ -291,7 +291,7 @@ const itineraryDays = [
   },
   {
     day: 4,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-4.webp',
     title: 'Santiago – Puerto Montt – Puerto Varas',
     activities: [
       'Desayuno en el hotel.',
@@ -303,7 +303,7 @@ const itineraryDays = [
   },
   {
     day: 5,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-5.webp',
     title: 'Cruce Internacional de Lagos',
     activities: [
       'Desayuno en el hotel.',
@@ -316,7 +316,7 @@ const itineraryDays = [
   },
   {
     day: 6,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day1.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-6.webp',
     title: 'Bariloche - Circuito Chico',
     activities: [
       'Desayuno en el hotel.',
@@ -328,7 +328,7 @@ const itineraryDays = [
   },
   {
     day: 7,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day2.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-7.webp',
     title: 'Bariloche – Buenos Aires',
     activities: [
       'Desayuno en el hotel.',
@@ -340,7 +340,7 @@ const itineraryDays = [
   },
   {
     day: 8,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day3.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-8.webp',
     title: 'Buenos Aires',
     activities: [
       'Desayuno en el hotel.',
@@ -352,7 +352,7 @@ const itineraryDays = [
   },
   {
     day: 9,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day4.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-9.webp',
     title: 'Buenos Aires - Día Libre',
     activities: [
       'Desayuno en el hotel.',
@@ -363,7 +363,7 @@ const itineraryDays = [
   },
   {
     day: 10,
-    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/day5.png',
+    image: 'https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/day-10.webp',
     title: 'Buenos Aires - Regreso',
     activities: [
       'Desayuno en el hotel.',
@@ -831,7 +831,7 @@ const initJourneySection = () => {
     {
       title: "Santiago de Chile",
       days: "Días 1-3",
-      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-chihuahua.png",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/recorrido-1.webp",
       details: `
         <ul>
           <li><i class="fas fa-check"></i> City tour histórico y moderno</li>
@@ -845,7 +845,7 @@ const initJourneySection = () => {
     {
       title: "Puerto Varas",
       days: "Día 4",
-      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-creel.png",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/recorrido-2.webp",
       details: `
         <ul>
           <li><i class="fas fa-check"></i> Vistas al volcán Osorno</li>
@@ -859,7 +859,7 @@ const initJourneySection = () => {
     {
       title: "Cruce Internacional de Lagos",
       days: "Día 5",
-      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-divisadero.png",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/recorrido-3.webp",
       details: `
         <ul>
           <li><i class="fas fa-check"></i> Cruce fronterizo más bello del mundo</li>
@@ -873,7 +873,7 @@ const initJourneySection = () => {
     {
       title: "San Carlos de Bariloche",
       days: "Día 6",
-      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-fuerte.png",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/recorrido-4.webp",
       details: `
         <ul>
           <li><i class="fas fa-check"></i> Circuito Chico incluido</li>
@@ -887,7 +887,7 @@ const initJourneySection = () => {
     {
       title: "Buenos Aires",
       days: "Días 7-10",
-      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2025/11/line-fuerte.png",
+      image: "https://lacasadelviaje.com.mx/wp-content/uploads/2026/01/recorrido-5.webp",
       details: `
         <ul>
           <li><i class="fas fa-check"></i> City tour completo</li>
