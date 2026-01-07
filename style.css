@@ -316,7 +316,7 @@ body > section.hero > div > div.form-container.visible > h3 > i {
   display: flex;
   align-items: flex-start;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  max-width: 168px;
+  width: 168px;
 }
 
 .feature-card:hover {
@@ -2774,3 +2774,16 @@ section { padding: 5rem 2rem; }
     font-size: 1rem !important;
   }
 }
+
+@media (max-width: 767px) {
+  body > section.tips-section > div.tips-content > div.tips-mosaic > div:nth-child(3),
+  body > section.tips-section > div.tips-content > div.tips-mosaic > div:nth-child(4),
+  body > section.tips-section > div.tips-content > div.tips-mosaic > div:nth-child(5) {
+    display:none;
+  }
+}
+
+
+
+
+

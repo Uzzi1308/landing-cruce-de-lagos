@@ -7,44 +7,16 @@
 // INICIALIZACIÓN DE CARRUSELES (SWIPER)
 
 const initSwipers = () => {
-  // Carrusel de Itinerario
-  if (document.querySelector(".itinerarySwiper")) {
-    new Swiper(".itinerarySwiper", {
-      effect: "coverflow",
-      centeredSlides: true,
-      slidesPerView: "auto",
-      loop: true,
-      allowTouchMove: true,
-      autoplay: { 
-        delay: 4000, 
-        ...CONFIG.autoplay 
-      },
-      coverflowEffect: {
-        rotate: 20,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: false
-      },
-      pagination: { 
-        el: ".swiper-pagination", 
-        clickable: true 
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-      },
-      breakpoints: CONFIG.breakpoints.itinerary
-    });
-  }
-
-  // Carrusel de Reseñas
+  // Carrusel de Reseñas - CORREGIDO
   if (document.querySelector(".reviewsSwiper")) {
+    const reviewsContainer = document.querySelector(".reviewsSwiper .swiper-wrapper");
+    const totalSlides = reviewsContainer ? reviewsContainer.children.length : 0;
+    
     new Swiper(".reviewsSwiper", {
       slidesPerView: 1,
       spaceBetween: 30,
-      loop: true,
-      allowTouchMove: false,
+      loop: totalSlides > 3, // Solo activar loop si hay suficientes slides
+      allowTouchMove: true, // Cambiado a true para mejor UX
       autoplay: { 
         delay: 3500, 
         ...CONFIG.autoplay 
