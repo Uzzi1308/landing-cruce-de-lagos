@@ -392,6 +392,7 @@ class InfiniteItineraryCarousel {
     this.currentPosition = 0;
     this.isPlaying = true;
     this.isUserInteracting = false;
+    this.isAnimating = false; // Nueva bandera para prevenir clics múltiples
     this.resumeTimeout = null;
     this.animationId = null;
     this.currentIndex = 0;
@@ -678,58 +679,88 @@ class InfiniteItineraryCarousel {
   }
   
   nextSlide() {
+    // Prevenir clics múltiples
+    if (this.isAnimating) return;
+    
+    this.isAnimating = true;
     this.isUserInteracting = true;
     this.pause();
     
     const slideWidth = this.getSlideWidth();
     const gap = this.config.gap;
     const totalSlideWidth = slideWidth + gap;
-    
-    this.currentPosition -= totalSlideWidth;
-    this.currentIndex = (this.currentIndex + 1) % itineraryDays.length;
-    
-    // Si llegamos al final del segundo set, resetear al principio del segundo set
     const totalDays = itineraryDays.length;
     const totalDistance = totalSlideWidth * totalDays;
     
-    if (Math.abs(this.currentPosition) >= totalDistance * 2) {
-      this.currentPosition += totalDistance;
-    }
+    // Actualizar índice
+    this.currentIndex = (this.currentIndex + 1) % totalDays;
+    
+    // Mover a la siguiente posición
+    this.currentPosition -= totalSlideWidth;
     
     this.track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     this.track.style.transform = `translateX(${this.currentPosition}px)`;
     
     this.updateIndicators();
-    this.scheduleResume();
+    
+    // Esperar a que termine la animación antes de permitir siguiente clic
+    setTimeout(() => {
+      // Resetear posición si llegamos al final del segundo set
+      if (Math.abs(this.currentPosition) >= totalDistance * 2) {
+        this.track.style.transition = 'none';
+        this.currentPosition += totalDistance;
+        this.track.style.transform = `translateX(${this.currentPosition}px)`;
+      }
+      
+      this.isAnimating = false;
+      this.scheduleResume();
+    }, 400);
   }
   
   prevSlide() {
+    // Prevenir clics múltiples
+    if (this.isAnimating) return;
+    
+    this.isAnimating = true;
     this.isUserInteracting = true;
     this.pause();
     
     const slideWidth = this.getSlideWidth();
     const gap = this.config.gap;
     const totalSlideWidth = slideWidth + gap;
-    
-    this.currentPosition += totalSlideWidth;
-    this.currentIndex = (this.currentIndex - 1 + itineraryDays.length) % itineraryDays.length;
-    
-    // Si retrocedemos al inicio del primer set, saltar al final del segundo set
     const totalDays = itineraryDays.length;
     const totalDistance = totalSlideWidth * totalDays;
     
-    if (this.currentPosition > -totalDistance) {
-      this.currentPosition -= totalDistance;
-    }
+    // Actualizar índice
+    this.currentIndex = (this.currentIndex - 1 + totalDays) % totalDays;
+    
+    // Mover a la posición anterior
+    this.currentPosition += totalSlideWidth;
     
     this.track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     this.track.style.transform = `translateX(${this.currentPosition}px)`;
     
     this.updateIndicators();
-    this.scheduleResume();
+    
+    // Esperar a que termine la animación antes de permitir siguiente clic
+    setTimeout(() => {
+      // Resetear posición si retrocedemos antes del primer set
+      if (this.currentPosition > -totalDistance) {
+        this.track.style.transition = 'none';
+        this.currentPosition -= totalDistance;
+        this.track.style.transform = `translateX(${this.currentPosition}px)`;
+      }
+      
+      this.isAnimating = false;
+      this.scheduleResume();
+    }, 400);
   }
   
   goToSlide(index) {
+    // Prevenir clics múltiples
+    if (this.isAnimating) return;
+    
+    this.isAnimating = true;
     this.isUserInteracting = true;
     this.pause();
     
@@ -747,7 +778,12 @@ class InfiniteItineraryCarousel {
     this.track.style.transform = `translateX(${this.currentPosition}px)`;
     
     this.updateIndicators();
-    this.scheduleResume();
+    
+    // Esperar a que termine la animación
+    setTimeout(() => {
+      this.isAnimating = false;
+      this.scheduleResume();
+    }, 400);
   }
   
   scheduleResume() {
@@ -796,17 +832,19 @@ class InfiniteItineraryCarousel {
     if (Math.abs(moveDiff) > slideWidth * 0.3) {
       // Mover un slide completo en la dirección del arrastre
       if (moveDiff > 0) {
-        this.prevSlide();
+        setTimeout(() => this.prevSlide(), 50);
       } else {
-        this.nextSlide();
+        setTimeout(() => this.nextSlide(), 50);
       }
     } else {
       // Volver a la posición original
       this.currentPosition = this.startPosition;
       this.track.style.transform = `translateX(${this.currentPosition}px)`;
+      setTimeout(() => {
+        this.isUserInteracting = false;
+        this.scheduleResume();
+      }, 300);
     }
-    
-    this.scheduleResume();
   }
   
   // Manejo de ratón
@@ -843,17 +881,19 @@ class InfiniteItineraryCarousel {
     if (Math.abs(moveDiff) > slideWidth * 0.3) {
       // Mover un slide completo en la dirección del arrastre
       if (moveDiff > 0) {
-        this.prevSlide();
+        setTimeout(() => this.prevSlide(), 50);
       } else {
-        this.nextSlide();
+        setTimeout(() => this.nextSlide(), 50);
       }
     } else {
       // Volver a la posición original
       this.currentPosition = this.startPosition;
       this.track.style.transform = `translateX(${this.currentPosition}px)`;
+      setTimeout(() => {
+        this.isUserInteracting = false;
+        this.scheduleResume();
+      }, 300);
     }
-    
-    this.scheduleResume();
   }
   
   handleMouseLeave() {
