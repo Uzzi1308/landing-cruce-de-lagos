@@ -309,6 +309,10 @@ body > section.hero > div > div.form-container.visible > h3 > i {
   justify-content: center;
 }
 
+.experience-grid-2x4 img {
+  width: 100%;
+}
+
 .feature-card {
   background: #fff;
   border-radius: 10px;
