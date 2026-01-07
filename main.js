@@ -272,9 +272,7 @@ const itineraryDays = [
     title: 'Santiago de Chile',
     activities: [
       'Desayuno en el hotel.',
-      'Visita de la ciudad en tour regular: Palacio de la Moneda, Plaza de Armas, Cerro Santa Lucía.',
-      'Recorrido por el Barrio Lastarria y Bellavista.',
-      'Visita a las comunas modernas de Providencia, Las Condes y Vitacura.',
+      'Visita de la ciudad en tour regular: Palacio de la Moneda, Plaza de Armas, Cerro Santa Lucía, etc.',
       'Tarde libre para actividades personales.',
       'Alojamiento en Santiago.'
     ]
@@ -287,7 +285,6 @@ const itineraryDays = [
       'Desayuno en el hotel.',
       'Salida hacia la costa para visitar Valparaíso, ciudad patrimonial de la humanidad.',
       'Subida en ascensor tradicional, paseo por cerros Alegre y Concepción.',
-      'Visita a La Sebastiana, casa-museo de Pablo Neruda.',
       'Continuación a Viña del Mar: Casino, avenidas costeras y playa de Reñaca.',
       'Regreso a Santiago. Alojamiento.'
     ]
@@ -299,7 +296,6 @@ const itineraryDays = [
     activities: [
       'Desayuno en el hotel.',
       'Traslado al aeropuerto para vuelo a Puerto Montt (no incluido).',
-      'Llegada a Puerto Montt, asistencia y traslado a Puerto Varas.',
       'Resto del día libre en la "Ciudad de las Rosas".',
       'Vistas espectaculares del volcán Osorno y lago Llanquihue.',
       'Alojamiento en Puerto Varas.'
@@ -327,8 +323,7 @@ const itineraryDays = [
       'Excursión Circuito Chico: Av. Bustillo, Playa Bonita, cerro Campanario.',
       'Visita a península Llao Llao, hotel Llao Llao y capilla San Eduardo.',
       'Vistas panorámicas del lago Nahuel Huapi y lago Moreno.',
-      'Tarde libre en Bariloche para disfrutar de chocolates y cervezas artesanales.',
-      'Alojamiento en Bariloche.'
+      'Tarde libre en Bariloche y alojamiento.'
     ]
   },
   {
@@ -340,7 +335,6 @@ const itineraryDays = [
       'Traslado al aeropuerto para vuelo a Buenos Aires (no incluido).',
       'Arribo a la capital argentina, asistencia y traslado al hotel.',
       'Tarde libre para primer contacto con la ciudad.',
-      'Recomendación: paseo por Puerto Madero al atardecer.',
       'Alojamiento en Buenos Aires.'
     ]
   },
@@ -353,8 +347,6 @@ const itineraryDays = [
       'Visita de la ciudad: Plaza de Mayo, Casa Rosada, Catedral.',
       'Recorrido por San Telmo, La Boca y Caminito.',
       'Visita a Puerto Madero, Recoleta y Palermo.',
-      'Tarde libre para compras o actividades opcionales.',
-      'Noche: sugerencia opcional de cena con espectáculo de tango.',
       'Alojamiento en Buenos Aires.'
     ]
   },
@@ -365,9 +357,7 @@ const itineraryDays = [
     activities: [
       'Desayuno en el hotel.',
       'Día libre para actividades personales.',
-      'Opciones recomendadas: Excursión al Tigre y Delta del Paraná.',
-      'Otra opción: día de campo en estancia típica argentina.',
-      'O simplemente explorar barrios como Palermo Soho, Belgrano o Núñez.',
+      'Opciones recomendadas: Excursión al Tigre y Delta del Paraná, día de campo en estancia típica argentina o simplemente explorar barrios como Palermo Soho, Belgrano o Núñez.',
       'Última noche en la capital argentina. Alojamiento.'
     ]
   },
