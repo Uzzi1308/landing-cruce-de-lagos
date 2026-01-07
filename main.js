@@ -248,7 +248,6 @@ function initDynamicForm() {
     }
   }, { passive: true });
   
-  console.log('✅ Formulario dinámico inicializado');
 }
 
 // ====================================
@@ -392,6 +391,10 @@ class InfiniteCarousel {
     this.prevTranslate = 0;
     this.animationId = null;
     
+    // Timer para reanudación automática
+    this.resumeTimer = null;
+    this.resumeDelay = 3000; // 3 segundos de inactividad para reanudar
+    
     // Configuración de velocidades
     this.autoPlaySpeed = {
       forward: 60,   // segundos para un ciclo completo hacia adelante
@@ -412,9 +415,7 @@ class InfiniteCarousel {
     }
   }
   
-  init() {
-    console.log('🚀 Inicializando carrusel infinito con JS');
-    
+  init() {    
     this.createSlides();
     this.setupEvents();
     this.createNavigationButtons();
@@ -485,8 +486,18 @@ class InfiniteCarousel {
   
   setupEvents() {
     if (this.container) {
-      this.container.addEventListener('mouseenter', () => this.pause());
-      this.container.addEventListener('mouseleave', () => !this.isPaused && this.resume());
+      this.container.addEventListener('mouseenter', () => {
+        // Solo pausar si no estamos ya pausados por una interacción del usuario
+        if (!this.isUserControlled) {
+          this.pause();
+        }
+      });
+      this.container.addEventListener('mouseleave', () => {
+        // Solo reanudar si no fue una interacción del usuario reciente
+        if (!this.isUserControlled && this.isPaused) {
+          this.resume();
+        }
+      });
     }
     
     this.track.addEventListener('touchstart', this.touchStart.bind(this));
@@ -540,8 +551,16 @@ class InfiniteCarousel {
     });
     
     [prevBtn, nextBtn].forEach(btn => {
-      btn.addEventListener('mouseenter', () => this.pause());
-      btn.addEventListener('mouseleave', () => !this.isPaused && this.resume());
+      btn.addEventListener('mouseenter', () => {
+        if (!this.isUserControlled) {
+          this.pause();
+        }
+      });
+      btn.addEventListener('mouseleave', () => {
+        if (!this.isUserControlled && this.isPaused) {
+          this.resume();
+        }
+      });
     });
   }
   
@@ -605,6 +624,11 @@ class InfiniteCarousel {
   pause() {
     this.isPaused = true;
     this.track.style.cursor = 'default';
+    // Cancelar cualquier timer de reanudación pendiente
+    if (this.resumeTimer) {
+      clearTimeout(this.resumeTimer);
+      this.resumeTimer = null;
+    }
   }
   
   resume() {
@@ -612,18 +636,40 @@ class InfiniteCarousel {
     this.isPaused = false;
     this.track.style.cursor = 'grab';
     this.startAutoPlay();
+    
+    // Cancelar timer de reanudación
+    if (this.resumeTimer) {
+      clearTimeout(this.resumeTimer);
+      this.resumeTimer = null;
+    }
+  }
+  
+  // Método para programar reanudación automática
+  scheduleResume() {
+    // Limpiar timer anterior si existe
+    if (this.resumeTimer) {
+      clearTimeout(this.resumeTimer);
+    }
+    
+    // Programar reanudación después del tiempo de inactividad
+    this.resumeTimer = setTimeout(() => {
+      if (this.isPaused && !this.isDragging) {
+        this.resume();
+        this.isUserControlled = false;
+      }
+    }, this.resumeDelay);
   }
   
   manualNext() {
     this.pause();
-    this.currentDirection = 1; // Asegurar dirección hacia adelante
     this.isUserControlled = true;
+    this.currentDirection = 1;
     
     const slideWidth = this.getSlideWidth();
     const totalSlides = itineraryDays.length;
     
-    // CORRECCIÓN: Moverse solo 1 slide en lugar de 10
-    this.currentIndex = (this.currentIndex + 1) % (this.slides.length);
+    // Moverse solo 1 slide
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
     
     const targetTranslate = -this.currentIndex * slideWidth;
     
@@ -634,12 +680,11 @@ class InfiniteCarousel {
     // Si estamos cerca del final del segundo set, resetear suavemente
     if (Math.abs(this.currentTranslate) >= slideWidth * totalSlides * 2) {
       setTimeout(() => {
-        this.currentIndex = totalSlides; // Volver al inicio del segundo set
+        this.currentIndex = totalSlides;
         this.currentTranslate = -this.currentIndex * slideWidth;
         this.track.style.transition = 'none';
         this.track.style.transform = `translateX(${this.currentTranslate}px)`;
         
-        // Forzar reflow
         this.track.offsetHeight;
         
         setTimeout(() => {
@@ -648,27 +693,24 @@ class InfiniteCarousel {
       }, 600);
     }
     
-    // Reanudar después de 3 segundos
-    setTimeout(() => {
-      this.isUserControlled = false;
-      if (!this.isPaused) this.resume();
-    }, 3000);
+    // Programar reanudación automática
+    this.scheduleResume();
   }
   
   manualPrev() {
     this.pause();
-    this.currentDirection = -1; // Dirección hacia atrás
     this.isUserControlled = true;
+    this.currentDirection = -1;
     
     const slideWidth = this.getSlideWidth();
     const totalSlides = itineraryDays.length;
     
-    // CORRECCIÓN: Moverse solo 1 slide hacia atrás en lugar de 10
+    // Moverse solo 1 slide hacia atrás
     this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
     
     // Si estamos cerca del inicio, saltar al final del segundo set
     if (this.currentIndex < totalSlides) {
-      this.currentIndex = totalSlides * 2 - 1; // Ir al último slide del segundo set
+      this.currentIndex = totalSlides * 2 - 1;
     }
     
     const targetTranslate = -this.currentIndex * slideWidth;
@@ -677,11 +719,8 @@ class InfiniteCarousel {
     this.track.style.transform = `translateX(${targetTranslate}px)`;
     this.currentTranslate = targetTranslate;
     
-    // Reanudar después de 3 segundos
-    setTimeout(() => {
-      this.isUserControlled = false;
-      if (!this.isPaused) this.resume();
-    }, 3000);
+    // Programar reanudación automática
+    this.scheduleResume();
   }
   
   next() {
@@ -704,6 +743,7 @@ class InfiniteCarousel {
   touchStart(e) {
     e.preventDefault();
     this.isDragging = true;
+    this.isUserControlled = true;
     this.startX = e.touches[0].clientX;
     this.prevTranslate = this.currentTranslate;
     this.pause();
@@ -739,7 +779,8 @@ class InfiniteCarousel {
       this.track.style.transform = `translateX(${this.currentTranslate}px)`;
       setTimeout(() => {
         this.track.style.transition = '';
-        if (!this.isPaused) this.resume();
+        // Programar reanudación automática
+        this.scheduleResume();
       }, 300);
     }
   }
@@ -748,6 +789,7 @@ class InfiniteCarousel {
   mouseDown(e) {
     e.preventDefault();
     this.isDragging = true;
+    this.isUserControlled = true;
     this.startX = e.clientX;
     this.prevTranslate = this.currentTranslate;
     this.pause();
@@ -782,7 +824,8 @@ class InfiniteCarousel {
       this.track.style.transform = `translateX(${this.currentTranslate}px)`;
       setTimeout(() => {
         this.track.style.transition = '';
-        if (!this.isPaused) this.resume();
+        // Programar reanudación automática
+        this.scheduleResume();
       }, 300);
     }
   }
@@ -795,7 +838,8 @@ class InfiniteCarousel {
       this.track.style.transform = `translateX(${this.currentTranslate}px)`;
       setTimeout(() => {
         this.track.style.transition = '';
-        if (!this.isPaused) this.resume();
+        // Programar reanudación automática
+        this.scheduleResume();
       }, 300);
     }
   }
@@ -810,7 +854,6 @@ function initCarousel() {
   
   if (track && !carouselInstance) {
     carouselInstance = new InfiniteCarousel();
-    console.log('✅ Carrusel infinito inicializado con éxito');
   }
 }
 
@@ -963,14 +1006,12 @@ const initJourneySection = () => {
   
   updatePointInfo(0);
   
-  console.log('✅ Sección de recorrido inicializada');
 };
 
 // ====================================
 // INICIALIZACIÓN PRINCIPAL
 // ====================================
 const init = () => {
-  console.log('Inicializando funcionalidades de la página...');
   
   initSwipers();
   initScrollBehaviors();
@@ -983,7 +1024,6 @@ const init = () => {
   initCarousel(); // Inicializar el nuevo carrusel
   initJourneySection();
 
-  console.log('Página inicializada correctamente');
 };
 
 // Inicializar cuando el DOM esté listo
