@@ -2884,7 +2884,195 @@ section { padding: 5rem 2rem; }
 }
 
 
+/* Estilos para los botones de navegación de la banda */
+.band-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
 
+.band-nav-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 6px 20px rgba(205, 25, 21, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.band-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.band-nav-btn i {
+  font-size: 1.2rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.band-nav-btn:hover i {
+  color: white;
+}
+
+.band-prev-btn {
+  left: 20px;
+}
+
+.band-next-btn {
+  right: 20px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .band-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .band-nav-btn i {
+    font-size: 1rem;
+  }
+  
+  .band-prev-btn {
+    left: 10px;
+  }
+  
+  .band-next-btn {
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .band-nav-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .band-nav-btn i {
+    font-size: 0.9rem;
+  }
+  
+  .band-prev-btn {
+    left: 5px;
+  }
+  
+  .band-next-btn {
+    right: 5px;
+  }
+}
+
+
+
+
+
+
+/* ESTILOS PARA INDICADORES DEL CARRUSEL */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-indicator:hover {
+  transform: scale(1.2);
+}
+
+.carousel-indicator.active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+/* MEJORAS PARA EL CARRUSEL INFINITO */
+.infinite-carousel-container {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+}
+
+.infinite-carousel-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.infinite-slide {
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 8px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.infinite-slide:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+/* RESPONSIVE PARA BOTONES DE NAVEGACIÓN */
+@media (max-width: 768px) {
+  .band-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .band-nav-btn i {
+    font-size: 1rem;
+  }
+  
+  .carousel-indicators {
+    bottom: 10px;
+  }
+  
+  .carousel-indicator {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .band-nav-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .band-nav-btn i {
+    font-size: 0.9rem;
+  }
+  
+  .carousel-indicators {
+    bottom: 5px;
+  }
+}
 
 
 

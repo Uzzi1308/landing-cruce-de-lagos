@@ -1,5 +1,5 @@
 // FUNCIONALIDADES PRINCIPALES DE LA PÁGINA
-// ult-mod: 07-01-2025
+// ult-mod: 08-01-2025
 // Este archivo maneja carruseles, animaciones, modales y comportamientos de scroll
 // Requiere: config.js cargado previamente
 
@@ -375,73 +375,67 @@ const itineraryDays = [
 ];
 
 // ====================================
-// NUEVO CARRUSEL INFINITO - 100% JS
+// NUEVA IMPLEMENTACIÓN: CARRUSEL INFINITO DE ITINERARIO
 // ====================================
 
-class InfiniteCarousel {
+class InfiniteItineraryCarousel {
   constructor() {
-    this.track = document.querySelector('.infinite-carousel-track');
     this.container = document.querySelector('.infinite-carousel-container');
+    this.track = document.querySelector('.infinite-carousel-track');
+    
+    if (!this.container || !this.track) {
+      console.error('No se encontró el carrusel de itinerario');
+      return;
+    }
+    
     this.slides = [];
-    this.currentIndex = 0;
-    this.isPaused = false;
-    this.isDragging = false;
-    this.startX = 0;
-    this.currentTranslate = 0;
-    this.prevTranslate = 0;
+    this.currentPosition = 0;
+    this.isPlaying = true;
+    this.isUserInteracting = false;
+    this.resumeTimeout = null;
     this.animationId = null;
+    this.currentIndex = 0;
     
-    // Timer para reanudación automática
-    this.resumeTimer = null;
-    this.resumeDelay = 3000; // 3 segundos de inactividad para reanudar
-    
-    // Configuración de velocidades
-    this.autoPlaySpeed = {
-      forward: 60,   // segundos para un ciclo completo hacia adelante
-      backward: 90   // segundos para un ciclo completo hacia atrás
-    };
-    this.currentDirection = 1; // 1 = adelante, -1 = atrás
-    this.isUserControlled = false; // Para saber si el usuario está controlando
-    
+    // Configuración
     this.config = {
       slideWidth: 300,
       gap: 8,
-      mobileWidth: 250,
-      tabletWidth: 280
+      speed: 40,
+      mobileSpeed: 50,
+      resumeDelay: 3000
     };
     
-    if (this.track) {
-      this.init();
-    }
+    this.init();
   }
   
-  init() {    
+  init() {
     this.createSlides();
     this.setupEvents();
     this.createNavigationButtons();
+    this.updateDimensions();
     this.startAutoPlay();
     
-    setTimeout(() => {
-      this.updateSlideDimensions();
-      this.setPositionByIndex(0);
-    }, 100);
+    // Añadir indicadores de posición
+    this.createIndicators();
   }
   
   createSlides() {
     this.track.innerHTML = '';
     this.slides = [];
     
+    // Crear 3 sets de slides para efecto infinito suave
     for (let copy = 0; copy < 3; copy++) {
-      itineraryDays.forEach(day => {
+      itineraryDays.forEach((day, index) => {
         const slide = document.createElement('div');
         slide.className = 'infinite-slide';
+        slide.dataset.day = day.day;
+        slide.dataset.index = index;
+        slide.dataset.copy = copy;
         slide.innerHTML = this.createSlideHTML(day);
         this.track.appendChild(slide);
         this.slides.push(slide);
       });
     }
-    
-    this.updateSlideDimensions();
   }
   
   createSlideHTML(day) {
@@ -459,108 +453,169 @@ class InfiniteCarousel {
     `;
   }
   
-  updateSlideDimensions() {
-    const width = this.getSlideWidth();
+  updateDimensions() {
+    const slideWidth = this.getSlideWidth();
     const gap = this.config.gap;
     
     this.slides.forEach(slide => {
-      slide.style.width = `${width}px`;
+      slide.style.width = `${slideWidth}px`;
       slide.style.marginRight = `${gap}px`;
       slide.style.flexShrink = '0';
     });
     
-    const totalWidth = (width + gap) * this.slides.length;
+    // Calcular ancho total del track
+    const totalWidth = (slideWidth + gap) * this.slides.length;
     this.track.style.width = `${totalWidth}px`;
     this.track.style.display = 'flex';
-    this.track.style.gap = `${gap}px`;
+    
+    // Posicionar en el centro del primer set
+    const totalDays = itineraryDays.length;
+    const totalSlideWidth = slideWidth + gap;
+    const offset = totalSlideWidth * totalDays; // Posicionar en el segundo set
+    
+    this.currentPosition = -offset;
+    this.track.style.transform = `translateX(${this.currentPosition}px)`;
   }
   
   getSlideWidth() {
     if (window.innerWidth <= 480) {
-      return this.config.mobileWidth;
+      return 250;
     } else if (window.innerWidth <= 768) {
-      return this.config.tabletWidth;
+      return 280;
     }
     return this.config.slideWidth;
   }
   
+  getCurrentSpeed() {
+    return window.innerWidth <= 768 ? this.config.mobileSpeed : this.config.speed;
+  }
+  
   setupEvents() {
-    if (this.container) {
-      this.container.addEventListener('mouseenter', () => {
-        // Solo pausar si no estamos ya pausados por una interacción del usuario
-        if (!this.isUserControlled) {
-          this.pause();
-        }
-      });
-      this.container.addEventListener('mouseleave', () => {
-        // Solo reanudar si no fue una interacción del usuario reciente
-        if (!this.isUserControlled && this.isPaused) {
-          this.resume();
-        }
-      });
-    }
+    // Pausar al hacer hover
+    this.container.addEventListener('mouseenter', () => {
+      if (this.isPlaying && !this.isUserInteracting) {
+        this.pause();
+      }
+    });
     
-    this.track.addEventListener('touchstart', this.touchStart.bind(this));
-    this.track.addEventListener('touchmove', this.touchMove.bind(this));
-    this.track.addEventListener('touchend', this.touchEnd.bind(this));
+    this.container.addEventListener('mouseleave', () => {
+      if (!this.isPlaying && !this.isUserInteracting) {
+        this.resume();
+      }
+    });
     
-    this.track.addEventListener('mousedown', this.mouseDown.bind(this));
-    this.track.addEventListener('mousemove', this.mouseMove.bind(this));
-    this.track.addEventListener('mouseup', this.mouseUp.bind(this));
-    this.track.addEventListener('mouseleave', this.mouseLeave.bind(this));
+    // Eventos táctiles
+    this.track.addEventListener('touchstart', this.handleTouchStart.bind(this));
+    this.track.addEventListener('touchmove', this.handleTouchMove.bind(this));
+    this.track.addEventListener('touchend', this.handleTouchEnd.bind(this));
     
+    // Eventos de ratón
+    this.track.addEventListener('mousedown', this.handleMouseDown.bind(this));
+    this.track.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    this.track.addEventListener('mouseup', this.handleMouseUp.bind(this));
+    this.track.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
+    
+    // Redimensionar ventana
     window.addEventListener('resize', () => {
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
-        this.updateSlideDimensions();
-        this.setPositionByIndex(this.currentIndex);
+        this.updateDimensions();
       }, 250);
     });
   }
   
   createNavigationButtons() {
-    if (this.container.querySelector('.carousel-nav-btn')) {
-      return;
-    }
+    // Eliminar botones existentes si los hay
+    const existingBtns = this.container.querySelectorAll('.band-nav-btn');
+    existingBtns.forEach(btn => btn.remove());
     
+    // Crear botones de navegación
     const prevBtn = document.createElement('button');
     const nextBtn = document.createElement('button');
     
-    prevBtn.className = 'carousel-nav-btn prev-carousel-btn';
-    nextBtn.className = 'carousel-nav-btn next-carousel-btn';
+    prevBtn.className = 'band-nav-btn band-prev-btn';
+    nextBtn.className = 'band-nav-btn band-next-btn';
     
     prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
     nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
     
-    prevBtn.setAttribute('aria-label', 'Slide anterior');
-    nextBtn.setAttribute('aria-label', 'Slide siguiente');
+    prevBtn.setAttribute('aria-label', 'Día anterior');
+    nextBtn.setAttribute('aria-label', 'Siguiente día');
     
     this.container.appendChild(prevBtn);
     this.container.appendChild(nextBtn);
     
+    // Eventos de navegación
     prevBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      this.manualPrev();
+      this.prevSlide();
     });
     
     nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      this.manualNext();
+      this.nextSlide();
     });
     
+    // Pausar al interactuar con botones
     [prevBtn, nextBtn].forEach(btn => {
       btn.addEventListener('mouseenter', () => {
-        if (!this.isUserControlled) {
+        if (this.isPlaying && !this.isUserInteracting) {
           this.pause();
         }
       });
-      btn.addEventListener('mouseleave', () => {
-        if (!this.isUserControlled && this.isPaused) {
-          this.resume();
-        }
+    });
+  }
+  
+  createIndicators() {
+    // Crear contenedor de indicadores
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.className = 'carousel-indicators';
+    indicatorsContainer.style.cssText = `
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+    `;
+    
+    // Crear indicadores para cada día
+    itineraryDays.forEach((day, index) => {
+      const indicator = document.createElement('button');
+      indicator.className = 'carousel-indicator';
+      indicator.dataset.index = index;
+      indicator.setAttribute('aria-label', `Ir al día ${day.day}`);
+      indicator.style.cssText = `
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        background: ${index === 0 ? 'var(--primary)' : '#ddd'};
+        cursor: pointer;
+        transition: background 0.3s ease;
+      `;
+      
+      indicator.addEventListener('click', () => {
+        this.goToSlide(index);
       });
+      
+      indicatorsContainer.appendChild(indicator);
+    });
+    
+    this.container.appendChild(indicatorsContainer);
+    this.indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+  }
+  
+  updateIndicators() {
+    if (!this.indicators) return;
+    
+    this.indicators.forEach((indicator, index) => {
+      indicator.style.background = index === this.currentIndex ? 'var(--primary)' : '#ddd';
     });
   }
   
@@ -569,293 +624,262 @@ class InfiniteCarousel {
       cancelAnimationFrame(this.animationId);
     }
     
-    const totalSlides = itineraryDays.length;
-    const totalDistance = this.getSlideWidth() * totalSlides;
-    const duration = this.getCurrentDuration() * 1000;
+    const slideWidth = this.getSlideWidth();
+    const gap = this.config.gap;
+    const totalSlideWidth = slideWidth + gap;
+    const totalDays = itineraryDays.length;
+    const totalDistance = totalSlideWidth * totalDays;
     
-    let startTime = null;
+    let lastTime = null;
+    const speed = this.getCurrentSpeed();
+    const pixelsPerSecond = totalDistance / speed;
     
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      if (this.isPaused || this.isDragging) {
-        startTime = timestamp - (this.currentTranslate / totalDistance) * duration;
-        if (!this.isPaused && !this.isDragging) {
-          this.animationId = requestAnimationFrame(animate);
+    const animate = (currentTime) => {
+      if (!lastTime) lastTime = currentTime;
+      
+      if (this.isPlaying && !this.isUserInteracting) {
+        const delta = currentTime - lastTime;
+        const moveAmount = (delta / 1000) * pixelsPerSecond;
+        
+        this.currentPosition -= moveAmount;
+        
+        // Si hemos pasado un set completo, resetear suavemente
+        if (Math.abs(this.currentPosition) >= totalDistance * 2) {
+          this.currentPosition += totalDistance;
         }
-        return;
+        
+        // Calcular índice actual basado en la posición
+        const slideIndex = Math.floor(Math.abs(this.currentPosition + totalDistance) / totalSlideWidth) % totalDays;
+        if (slideIndex !== this.currentIndex) {
+          this.currentIndex = slideIndex;
+          this.updateIndicators();
+        }
+        
+        this.track.style.transform = `translateX(${this.currentPosition}px)`;
       }
       
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      this.currentTranslate = -totalDistance * easeProgress * this.currentDirection;
-      
-      this.track.style.transform = `translateX(${this.currentTranslate}px)`;
-      
-      if (progress >= 1) {
-        startTime = timestamp;
-        this.currentTranslate = -totalDistance * this.currentDirection;
-        this.track.style.transition = 'none';
-        this.track.style.transform = `translateX(${this.currentTranslate}px)`;
-        
-        this.track.offsetHeight;
-        
-        setTimeout(() => {
-          this.track.style.transition = '';
-          startTime = timestamp - (this.currentTranslate / totalDistance) * duration;
-        }, 50);
-      }
-      
+      lastTime = currentTime;
       this.animationId = requestAnimationFrame(animate);
     };
     
     this.animationId = requestAnimationFrame(animate);
   }
   
-  getCurrentDuration() {
-    if (this.currentDirection === 1) {
-      return this.autoPlaySpeed.forward;
-    } else {
-      return this.autoPlaySpeed.backward;
-    }
-  }
-  
   pause() {
-    this.isPaused = true;
+    this.isPlaying = false;
     this.track.style.cursor = 'default';
-    // Cancelar cualquier timer de reanudación pendiente
-    if (this.resumeTimer) {
-      clearTimeout(this.resumeTimer);
-      this.resumeTimer = null;
-    }
   }
   
   resume() {
-    if (!this.isPaused) return;
-    this.isPaused = false;
+    if (this.isUserInteracting) return;
+    
+    this.isPlaying = true;
     this.track.style.cursor = 'grab';
-    this.startAutoPlay();
-    
-    // Cancelar timer de reanudación
-    if (this.resumeTimer) {
-      clearTimeout(this.resumeTimer);
-      this.resumeTimer = null;
-    }
   }
   
-  // Método para programar reanudación automática
+  nextSlide() {
+    this.isUserInteracting = true;
+    this.pause();
+    
+    const slideWidth = this.getSlideWidth();
+    const gap = this.config.gap;
+    const totalSlideWidth = slideWidth + gap;
+    
+    this.currentPosition -= totalSlideWidth;
+    this.currentIndex = (this.currentIndex + 1) % itineraryDays.length;
+    
+    // Si llegamos al final del segundo set, resetear al principio del segundo set
+    const totalDays = itineraryDays.length;
+    const totalDistance = totalSlideWidth * totalDays;
+    
+    if (Math.abs(this.currentPosition) >= totalDistance * 2) {
+      this.currentPosition += totalDistance;
+    }
+    
+    this.track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    this.track.style.transform = `translateX(${this.currentPosition}px)`;
+    
+    this.updateIndicators();
+    this.scheduleResume();
+  }
+  
+  prevSlide() {
+    this.isUserInteracting = true;
+    this.pause();
+    
+    const slideWidth = this.getSlideWidth();
+    const gap = this.config.gap;
+    const totalSlideWidth = slideWidth + gap;
+    
+    this.currentPosition += totalSlideWidth;
+    this.currentIndex = (this.currentIndex - 1 + itineraryDays.length) % itineraryDays.length;
+    
+    // Si retrocedemos al inicio del primer set, saltar al final del segundo set
+    const totalDays = itineraryDays.length;
+    const totalDistance = totalSlideWidth * totalDays;
+    
+    if (this.currentPosition > -totalDistance) {
+      this.currentPosition -= totalDistance;
+    }
+    
+    this.track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    this.track.style.transform = `translateX(${this.currentPosition}px)`;
+    
+    this.updateIndicators();
+    this.scheduleResume();
+  }
+  
+  goToSlide(index) {
+    this.isUserInteracting = true;
+    this.pause();
+    
+    const slideWidth = this.getSlideWidth();
+    const gap = this.config.gap;
+    const totalSlideWidth = slideWidth + gap;
+    const totalDays = itineraryDays.length;
+    const totalDistance = totalSlideWidth * totalDays;
+    
+    // Calcular posición para el índice deseado en el segundo set
+    this.currentIndex = index;
+    this.currentPosition = -(totalDistance + (totalSlideWidth * index));
+    
+    this.track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    this.track.style.transform = `translateX(${this.currentPosition}px)`;
+    
+    this.updateIndicators();
+    this.scheduleResume();
+  }
+  
   scheduleResume() {
-    // Limpiar timer anterior si existe
-    if (this.resumeTimer) {
-      clearTimeout(this.resumeTimer);
+    if (this.resumeTimeout) {
+      clearTimeout(this.resumeTimeout);
     }
     
-    // Programar reanudación después del tiempo de inactividad
-    this.resumeTimer = setTimeout(() => {
-      if (this.isPaused && !this.isDragging) {
-        this.resume();
-        this.isUserControlled = false;
-      }
-    }, this.resumeDelay);
+    this.resumeTimeout = setTimeout(() => {
+      this.isUserInteracting = false;
+      this.resume();
+    }, this.config.resumeDelay);
   }
   
-  manualNext() {
-    this.pause();
-    this.isUserControlled = true;
-    this.currentDirection = 1;
-    
-    const slideWidth = this.getSlideWidth();
-    const totalSlides = itineraryDays.length;
-    
-    // Moverse solo 1 slide
-    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    
-    const targetTranslate = -this.currentIndex * slideWidth;
-    
-    this.track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    this.track.style.transform = `translateX(${targetTranslate}px)`;
-    this.currentTranslate = targetTranslate;
-    
-    // Si estamos cerca del final del segundo set, resetear suavemente
-    if (Math.abs(this.currentTranslate) >= slideWidth * totalSlides * 2) {
-      setTimeout(() => {
-        this.currentIndex = totalSlides;
-        this.currentTranslate = -this.currentIndex * slideWidth;
-        this.track.style.transition = 'none';
-        this.track.style.transform = `translateX(${this.currentTranslate}px)`;
-        
-        this.track.offsetHeight;
-        
-        setTimeout(() => {
-          this.track.style.transition = '';
-        }, 50);
-      }, 600);
-    }
-    
-    // Programar reanudación automática
-    this.scheduleResume();
-  }
-  
-  manualPrev() {
-    this.pause();
-    this.isUserControlled = true;
-    this.currentDirection = -1;
-    
-    const slideWidth = this.getSlideWidth();
-    const totalSlides = itineraryDays.length;
-    
-    // Moverse solo 1 slide hacia atrás
-    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-    
-    // Si estamos cerca del inicio, saltar al final del segundo set
-    if (this.currentIndex < totalSlides) {
-      this.currentIndex = totalSlides * 2 - 1;
-    }
-    
-    const targetTranslate = -this.currentIndex * slideWidth;
-    
-    this.track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    this.track.style.transform = `translateX(${targetTranslate}px)`;
-    this.currentTranslate = targetTranslate;
-    
-    // Programar reanudación automática
-    this.scheduleResume();
-  }
-  
-  next() {
-    this.currentDirection = 1;
-    this.manualNext();
-  }
-  
-  prev() {
-    this.currentDirection = -1;
-    this.manualPrev();
-  }
-  
-  setPositionByIndex(index) {
-    const width = this.getSlideWidth();
-    this.currentTranslate = -index * width;
-    this.track.style.transform = `translateX(${this.currentTranslate}px)`;
-  }
-  
-  // Touch events
-  touchStart(e) {
+  // Manejo de touch
+  handleTouchStart(e) {
     e.preventDefault();
-    this.isDragging = true;
-    this.isUserControlled = true;
-    this.startX = e.touches[0].clientX;
-    this.prevTranslate = this.currentTranslate;
+    this.isUserInteracting = true;
     this.pause();
+    
+    this.startX = e.touches[0].clientX;
+    this.startPosition = this.currentPosition;
     this.track.style.transition = 'none';
     this.track.style.cursor = 'grabbing';
   }
   
-  touchMove(e) {
-    if (!this.isDragging) return;
+  handleTouchMove(e) {
+    if (!this.isUserInteracting) return;
     e.preventDefault();
+    
     const currentX = e.touches[0].clientX;
     const diff = currentX - this.startX;
-    this.currentTranslate = this.prevTranslate + diff;
-    this.track.style.transform = `translateX(${this.currentTranslate}px)`;
+    this.currentPosition = this.startPosition + diff;
+    this.track.style.transform = `translateX(${this.currentPosition}px)`;
   }
   
-  touchEnd() {
-    if (!this.isDragging) return;
-    this.isDragging = false;
+  handleTouchEnd() {
+    if (!this.isUserInteracting) return;
+    
     this.track.style.cursor = 'grab';
+    this.track.style.transition = 'transform 0.3s ease-out';
     
-    const width = this.getSlideWidth();
-    const movedBy = this.currentTranslate - this.prevTranslate;
+    // Aplicar inercia y determinar si debemos cambiar de slide
+    const moveDiff = this.currentPosition - this.startPosition;
+    const slideWidth = this.getSlideWidth();
     
-    if (Math.abs(movedBy) > width * 0.3) {
-      if (movedBy > 0) {
-        this.prev();
+    if (Math.abs(moveDiff) > slideWidth * 0.3) {
+      // Mover un slide completo en la dirección del arrastre
+      if (moveDiff > 0) {
+        this.prevSlide();
       } else {
-        this.next();
+        this.nextSlide();
       }
     } else {
-      this.track.style.transition = 'transform 0.3s ease-out';
-      this.track.style.transform = `translateX(${this.currentTranslate}px)`;
-      setTimeout(() => {
-        this.track.style.transition = '';
-        // Programar reanudación automática
-        this.scheduleResume();
-      }, 300);
+      // Volver a la posición original
+      this.currentPosition = this.startPosition;
+      this.track.style.transform = `translateX(${this.currentPosition}px)`;
     }
+    
+    this.scheduleResume();
   }
   
-  // Mouse events
-  mouseDown(e) {
+  // Manejo de ratón
+  handleMouseDown(e) {
     e.preventDefault();
-    this.isDragging = true;
-    this.isUserControlled = true;
-    this.startX = e.clientX;
-    this.prevTranslate = this.currentTranslate;
+    this.isUserInteracting = true;
     this.pause();
+    
+    this.startX = e.clientX;
+    this.startPosition = this.currentPosition;
     this.track.style.transition = 'none';
     this.track.style.cursor = 'grabbing';
   }
   
-  mouseMove(e) {
-    if (!this.isDragging) return;
+  handleMouseMove(e) {
+    if (!this.isUserInteracting) return;
+    
     const currentX = e.clientX;
     const diff = currentX - this.startX;
-    this.currentTranslate = this.prevTranslate + diff;
-    this.track.style.transform = `translateX(${this.currentTranslate}px)`;
+    this.currentPosition = this.startPosition + diff;
+    this.track.style.transform = `translateX(${this.currentPosition}px)`;
   }
   
-  mouseUp() {
-    if (!this.isDragging) return;
-    this.isDragging = false;
+  handleMouseUp() {
+    if (!this.isUserInteracting) return;
+    
     this.track.style.cursor = 'grab';
+    this.track.style.transition = 'transform 0.3s ease-out';
     
-    const width = this.getSlideWidth();
-    const movedBy = this.currentTranslate - this.prevTranslate;
+    // Aplicar inercia y determinar si debemos cambiar de slide
+    const moveDiff = this.currentPosition - this.startPosition;
+    const slideWidth = this.getSlideWidth();
     
-    if (Math.abs(movedBy) > width * 0.3) {
-      if (movedBy > 0) {
-        this.prev();
+    if (Math.abs(moveDiff) > slideWidth * 0.3) {
+      // Mover un slide completo en la dirección del arrastre
+      if (moveDiff > 0) {
+        this.prevSlide();
       } else {
-        this.next();
+        this.nextSlide();
       }
     } else {
-      this.track.style.transition = 'transform 0.3s ease-out';
-      this.track.style.transform = `translateX(${this.currentTranslate}px)`;
-      setTimeout(() => {
-        this.track.style.transition = '';
-        // Programar reanudación automática
-        this.scheduleResume();
-      }, 300);
+      // Volver a la posición original
+      this.currentPosition = this.startPosition;
+      this.track.style.transform = `translateX(${this.currentPosition}px)`;
     }
+    
+    this.scheduleResume();
   }
   
-  mouseLeave() {
-    if (this.isDragging) {
-      this.isDragging = false;
+  handleMouseLeave() {
+    if (this.isUserInteracting) {
       this.track.style.cursor = 'grab';
       this.track.style.transition = 'transform 0.3s ease-out';
-      this.track.style.transform = `translateX(${this.currentTranslate}px)`;
-      setTimeout(() => {
-        this.track.style.transition = '';
-        // Programar reanudación automática
-        this.scheduleResume();
-      }, 300);
+      this.scheduleResume();
     }
   }
-}
-
-// Variable global para la instancia del carrusel
-let carouselInstance = null;
-
-// Función para inicializar el carrusel
-function initCarousel() {
-  const track = document.querySelector('.infinite-carousel-track');
   
-  if (track && !carouselInstance) {
-    carouselInstance = new InfiniteCarousel();
+  destroy() {
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+    
+    if (this.resumeTimeout) {
+      clearTimeout(this.resumeTimeout);
+    }
+    
+    // Remover event listeners
+    window.removeEventListener('resize', this.handleResize);
   }
 }
+
+// Variable global para la instancia
+let itineraryCarouselInstance = null;
 
 // ====================================
 // SECCIÓN RECORRIDO INTERACTIVO
@@ -1021,8 +1045,12 @@ const init = () => {
   initSmoothScroll();
   initMobileMenu();
   initDynamicForm();
-  initCarousel(); // Inicializar el nuevo carrusel
   initJourneySection();
+
+  // Inicializar carrusel de itinerario infinito
+  if (document.querySelector('.infinite-carousel-container')) {
+    itineraryCarouselInstance = new InfiniteItineraryCarousel();
+  }
 
 };
 
@@ -1041,8 +1069,8 @@ if (typeof MutationObserver !== 'undefined') {
         const hasCarousel = Array.from(mutation.addedNodes).some(node => 
           node.nodeType === 1 && node.querySelector('.infinite-carousel-track')
         );
-        if (hasCarousel && !carouselInstance) {
-          initCarousel();
+        if (hasCarousel && !itineraryCarouselInstance) {
+          itineraryCarouselInstance = new InfiniteItineraryCarousel();
         }
       }
     });
@@ -1053,7 +1081,22 @@ if (typeof MutationObserver !== 'undefined') {
 
 // Manejar redimensionamiento para el carrusel
 window.addEventListener('resize', () => {
-  if (carouselInstance) {
-    carouselInstance.updateSlideDimensions();
+  if (itineraryCarouselInstance) {
+    itineraryCarouselInstance.updateDimensions();
   }
 });
+
+// Exportar para uso global
+window.LCDV = window.LCDV || {};
+window.LCDV.restartItineraryCarousel = function() {
+  if (itineraryCarouselInstance) {
+    itineraryCarouselInstance.destroy();
+    itineraryCarouselInstance = null;
+  }
+  
+  if (document.querySelector('.infinite-carousel-container')) {
+    itineraryCarouselInstance = new InfiniteItineraryCarousel();
+  }
+  
+  return itineraryCarouselInstance;
+};
