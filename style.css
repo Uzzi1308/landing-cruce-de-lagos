@@ -2484,7 +2484,7 @@ section { padding: 5rem 2rem; }
   .point-label { font-size: 0.85rem; padding: 7px 12px; }
   #point-title { font-size: 1.8rem; }
   .info-image { height: 180px; }
-  .journey-info { min-height: 380px; max-height: 480px; }
+  .journey-info { min-height: 380px;}
 }
 
 /* Mobile muy pequeño para journey */
