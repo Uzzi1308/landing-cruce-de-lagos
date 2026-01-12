@@ -412,7 +412,6 @@ class InfiniteItineraryCarousel {
   init() {
     this.createSlides();
     this.setupEvents();
-    this.createNavigationButtons();
     this.updateDimensions();
     this.startAutoPlay();
     
@@ -525,92 +524,147 @@ class InfiniteItineraryCarousel {
     });
   }
   
-  createNavigationButtons() {
-    // Eliminar botones existentes si los hay
-    const existingBtns = this.container.querySelectorAll('.band-nav-btn');
-    existingBtns.forEach(btn => btn.remove());
-    
-    // Crear botones de navegación
-    const prevBtn = document.createElement('button');
-    const nextBtn = document.createElement('button');
-    
-    prevBtn.className = 'band-nav-btn band-prev-btn';
-    nextBtn.className = 'band-nav-btn band-next-btn';
-    
-    prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-    nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    
-    prevBtn.setAttribute('aria-label', 'Día anterior');
-    nextBtn.setAttribute('aria-label', 'Siguiente día');
-    
-    this.container.appendChild(prevBtn);
-    this.container.appendChild(nextBtn);
-    
-    // Eventos de navegación
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      this.prevSlide();
-    });
-    
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      this.nextSlide();
-    });
-    
-    // Pausar al interactuar con botones
-    [prevBtn, nextBtn].forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        if (this.isPlaying && !this.isUserInteracting) {
-          this.pause();
-        }
-      });
-    });
-  }
+createIndicators() {
+  // Crear contenedor de indicadores y flechas
+  const indicatorsWrapper = document.createElement('div');
+  indicatorsWrapper.className = 'carousel-navigation-wrapper';
+  indicatorsWrapper.style.cssText = `
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  `;
   
-  createIndicators() {
-    // Crear contenedor de indicadores
-    const indicatorsContainer = document.createElement('div');
-    indicatorsContainer.className = 'carousel-indicators';
-    indicatorsContainer.style.cssText = `
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      z-index: 10;
+  // Crear botón anterior
+  const prevArrow = document.createElement('button');
+  prevArrow.className = 'carousel-arrow carousel-arrow-prev';
+  prevArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
+  prevArrow.setAttribute('aria-label', 'Día anterior');
+  prevArrow.style.cssText = `
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  `;
+  
+  // Crear contenedor de indicadores
+  const indicatorsContainer = document.createElement('div');
+  indicatorsContainer.className = 'carousel-indicators';
+  indicatorsContainer.style.cssText = `
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  `;
+  
+  // Crear indicadores para cada día
+  itineraryDays.forEach((day, index) => {
+    const indicator = document.createElement('button');
+    indicator.className = 'carousel-indicator';
+    indicator.dataset.index = index;
+    indicator.setAttribute('aria-label', `Ir al día ${day.day}`);
+    indicator.style.cssText = `
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: ${index === 0 ? 'var(--primary)' : '#ddd'};
+      cursor: pointer;
+      transition: all 0.3s ease;
     `;
     
-    // Crear indicadores para cada día
-    itineraryDays.forEach((day, index) => {
-      const indicator = document.createElement('button');
-      indicator.className = 'carousel-indicator';
-      indicator.dataset.index = index;
-      indicator.setAttribute('aria-label', `Ir al día ${day.day}`);
-      indicator.style.cssText = `
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        border: none;
-        background: ${index === 0 ? 'var(--primary)' : '#ddd'};
-        cursor: pointer;
-        transition: background 0.3s ease;
-      `;
-      
-      indicator.addEventListener('click', () => {
-        this.goToSlide(index);
-      });
-      
-      indicatorsContainer.appendChild(indicator);
+    indicator.addEventListener('click', () => {
+      this.goToSlide(index);
     });
     
-    this.container.appendChild(indicatorsContainer);
-    this.indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
-  }
+    indicatorsContainer.appendChild(indicator);
+  });
+  
+  // Crear botón siguiente
+  const nextArrow = document.createElement('button');
+  nextArrow.className = 'carousel-arrow carousel-arrow-next';
+  nextArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+  nextArrow.setAttribute('aria-label', 'Siguiente día');
+  nextArrow.style.cssText = `
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  `;
+  
+  // Eventos de las flechas
+  prevArrow.addEventListener('click', () => {
+    const newIndex = (this.currentIndex - 1 + itineraryDays.length) % itineraryDays.length;
+    this.goToSlide(newIndex);
+  });
+  
+  nextArrow.addEventListener('click', () => {
+    const newIndex = (this.currentIndex + 1) % itineraryDays.length;
+    this.goToSlide(newIndex);
+  });
+  
+  // Efectos hover
+  [prevArrow, nextArrow].forEach(arrow => {
+    arrow.addEventListener('mouseenter', () => {
+      arrow.style.background = 'var(--primary)';
+      arrow.querySelector('i').style.color = 'white';
+      arrow.style.transform = 'scale(1.1)';
+    });
+    
+    arrow.addEventListener('mouseleave', () => {
+      arrow.style.background = 'rgba(255, 255, 255, 0.9)';
+      arrow.querySelector('i').style.color = 'var(--primary)';
+      arrow.style.transform = 'scale(1)';
+    });
+    
+    // Pausar autoplay al interactuar con flechas
+    arrow.addEventListener('mouseenter', () => {
+      if (this.isPlaying && !this.isUserInteracting) {
+        this.pause();
+      }
+    });
+  });
+  
+  // Estilos de los iconos
+  const icons = indicatorsWrapper.querySelectorAll('i');
+  icons.forEach(icon => {
+    icon.style.cssText = `
+      color: var(--primary);
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    `;
+  });
+  
+  // Ensamblar todo
+  indicatorsWrapper.appendChild(prevArrow);
+  indicatorsWrapper.appendChild(indicatorsContainer);
+  indicatorsWrapper.appendChild(nextArrow);
+  
+  this.container.appendChild(indicatorsWrapper);
+  this.indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+}
   
   updateIndicators() {
     if (!this.indicators) return;

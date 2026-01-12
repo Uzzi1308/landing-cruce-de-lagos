@@ -3078,11 +3078,3 @@ section { padding: 5rem 2rem; }
   }
 }
 
-
-
-/* Ocultar flechas del carrusel - temporal */
-.band-nav-btn,
-.band-prev-btn,
-.band-next-btn {
-  display: none !important;
-}
