@@ -238,57 +238,68 @@ Template Name: Cruce de Lagos
   <p class="section-subtitle">Descubre cada destino que visitarás en este viaje inolvidable</p>
   
   <div class="journey-container">
-    <!-- Mapa con línea recta y puntos -->
-    <div class="journey-map">
-      <!-- Línea recta entre marcadores y etiquetas -->
-      <svg class="journey-line" viewBox="0 0 1000 4" preserveAspectRatio="none">
-        <line class="dotted-line" 
-              x1="50" y1="2" 
-              x2="900" y2="2"
-              stroke="#CD1915" 
-              stroke-width="4"/>
-      </svg>
-      
-      <!-- Puntos del recorrido -->
-      <div class="journey-points">
-        <div class="point active" data-point="0" role="button" tabindex="0" aria-label="Santiago de Chile">
-          <div class="point-marker">
-            <i class="fas fa-city" aria-hidden="true"></i>
-          </div>
-          <div class="point-label">Santiago</div>
-        </div>
+    <!-- COLUMNA IZQUIERDA: Mapa + Botón -->
+    <div class="journey-left-column">
+      <!-- Mapa con línea recta y puntos -->
+      <div class="journey-map">
+        <!-- Línea recta entre marcadores y etiquetas -->
+        <svg class="journey-line" viewBox="0 0 1000 4" preserveAspectRatio="none">
+          <line class="dotted-line" 
+                x1="50" y1="2" 
+                x2="900" y2="2"
+                stroke="#CD1915" 
+                stroke-width="4"/>
+        </svg>
         
-        <div class="point" data-point="1" role="button" tabindex="0" aria-label="Puerto Varas">
-          <div class="point-marker">
-            <i class="fas fa-mountain" aria-hidden="true"></i>
+        <!-- Puntos del recorrido -->
+        <div class="journey-points">
+          <div class="point active" data-point="0" role="button" tabindex="0" aria-label="Santiago de Chile">
+            <div class="point-marker">
+              <i class="fas fa-city" aria-hidden="true"></i>
+            </div>
+            <div class="point-label">Santiago</div>
           </div>
-          <div class="point-label">Puerto Varas</div>
-        </div>
-        
-        <div class="point" data-point="2" role="button" tabindex="0" aria-label="Cruce de Lagos">
-          <div class="point-marker">
-            <i class="fas fa-ship" aria-hidden="true"></i>
+          
+          <div class="point" data-point="1" role="button" tabindex="0" aria-label="Puerto Varas">
+            <div class="point-marker">
+              <i class="fas fa-mountain" aria-hidden="true"></i>
+            </div>
+            <div class="point-label">Puerto Varas</div>
           </div>
-          <div class="point-label">Cruce Lagos</div>
-        </div>
-        
-        <div class="point" data-point="3" role="button" tabindex="0" aria-label="San Carlos de Bariloche">
-          <div class="point-marker">
-            <i class="fas fa-tree" aria-hidden="true"></i>
+          
+          <div class="point" data-point="2" role="button" tabindex="0" aria-label="Cruce de Lagos">
+            <div class="point-marker">
+              <i class="fas fa-ship" aria-hidden="true"></i>
+            </div>
+            <div class="point-label">Cruce Lagos</div>
           </div>
-          <div class="point-label">Bariloche</div>
-        </div>
-        
-        <div class="point" data-point="4" role="button" tabindex="0" aria-label="Buenos Aires">
-          <div class="point-marker">
-            <i class="fas fa-landmark" aria-hidden="true"></i>
+          
+          <div class="point" data-point="3" role="button" tabindex="0" aria-label="San Carlos de Bariloche">
+            <div class="point-marker">
+              <i class="fas fa-tree" aria-hidden="true"></i>
+            </div>
+            <div class="point-label">Bariloche</div>
           </div>
-          <div class="point-label">Buenos Aires</div>
+          
+          <div class="point" data-point="4" role="button" tabindex="0" aria-label="Buenos Aires">
+            <div class="point-marker">
+              <i class="fas fa-landmark" aria-hidden="true"></i>
+            </div>
+            <div class="point-label">Buenos Aires</div>
+          </div>
         </div>
+      </div>
+
+      <!-- Botón en la misma columna -->
+      <div class="journey-btn-container">
+        <button class="btn-reservar-inline" data-action="open-reservation-modal">
+          <i class="fas fa-calendar-check"></i>
+          Reservar Ahora
+        </button>
       </div>
     </div>
     
-    <!-- Panel de información -->
+    <!-- COLUMNA DERECHA: Información -->
     <div class="journey-info">
       <div class="info-header">
         <h3 id="point-title">Santiago de Chile</h3>
@@ -340,12 +351,7 @@ Template Name: Cruce de Lagos
   </div>
 </section>
 
-<div class="container-btn-inline">
-  <button class="btn-reservar-inline" data-action="open-reservation-modal">
-    <i class="fas fa-calendar-check"></i>
-    Reservar Ahora
-  </button>
-</div>
+
 
 <section class="tips-section">
   <!-- Fondo grande -->

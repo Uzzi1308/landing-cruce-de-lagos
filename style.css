@@ -3255,3 +3255,150 @@ section { padding: 5rem 2rem; }
 #modalAdditionalFields {
   display: block;
 }
+
+
+/* ============================================
+   LAYOUT MEJORADO PARA LA SECCIÓN DE RECORRIDO
+   ============================================ */
+
+.journey-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Para desktop: dos columnas */
+@media (min-width: 992px) {
+  .journey-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  
+  /* Columna izquierda: mapa + botón */
+  .journey-left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+  }
+  
+  /* Ajustar el mapa para que ocupe más espacio */
+  .journey-left-column .journey-map {
+    flex: 1;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Contenedor del botón en columna izquierda */
+  .journey-btn-container {
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  /* Ajustar el botón para que se vea mejor en columna */
+  .journey-btn-container .btn-reservar-inline {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  /* Ajustar el journey-info para que ocupe toda la altura */
+  .journey-info {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .info-content {
+    flex-grow: 1;
+  }
+}
+
+/* Ajustes para tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  .journey-left-column .journey-map {
+    min-height: 320px;
+  }
+}
+
+/* Para móvil: mantener una columna */
+@media (max-width: 767px) {
+  .journey-left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .journey-btn-container {
+    text-align: center;
+    padding: 1rem 0 0;
+  }
+  
+  .journey-btn-container .btn-reservar-inline {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  /* Ocultar el botón duplicado que estaba después del mapa */
+  .journey-section .container-btn-inline {
+    display: none;
+  }
+}
+
+/* Ajustes para la línea del mapa en layout de dos columnas */
+@media (min-width: 992px) {
+  .journey-map {
+    min-height: 380px;
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .journey-line {
+    top: 53%;
+    transform: translateY(-50%);
+  }
+}
+
+/* Mejoras visuales para el botón en columna */
+.journey-btn-container .btn-reservar-inline {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secundary) 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(205, 25, 21, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.journey-btn-container .btn-reservar-inline:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(205, 25, 21, 0.5);
+  background: linear-gradient(135deg, var(--secundary) 0%, var(--primary) 100%);
+}
+
+.journey-btn-container .btn-reservar-inline i {
+  font-size: 1.2rem;
+}
+
+/* Asegurar que la sección del recorrido tenga buen espaciado */
+.journey-section {
+  padding: 4rem 1rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Eliminar el contenedor de botón duplicado que estaba fuera */
+.journey-section .container-btn-inline {
+  display: none;
+}
