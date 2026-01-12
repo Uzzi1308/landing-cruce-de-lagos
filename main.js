@@ -417,6 +417,7 @@ class InfiniteItineraryCarousel {
     
     // Añadir indicadores de posición
     this.createIndicators();
+    initCF7DynamicForm();
   }
   
   createSlides() {
@@ -525,94 +526,47 @@ class InfiniteItineraryCarousel {
   }
   
 createIndicators() {
-  // Crear contenedor de indicadores y flechas
-  const indicatorsWrapper = document.createElement('div');
-  indicatorsWrapper.className = 'carousel-navigation-wrapper';
-  indicatorsWrapper.style.cssText = `
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: 20px;
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  `;
+  // Crear contenedor de flechas (separado del contenedor de dots)
+  const arrowsContainer = document.createElement('div');
+  arrowsContainer.className = 'carousel-arrows-container';
   
   // Crear botón anterior
   const prevArrow = document.createElement('button');
   prevArrow.className = 'carousel-arrow carousel-arrow-prev';
   prevArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
   prevArrow.setAttribute('aria-label', 'Día anterior');
-  prevArrow.style.cssText = `
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid white;
-    background: rgba(255, 255, 255, 0.9);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  `;
-  
-  // Crear contenedor de indicadores
-  const indicatorsContainer = document.createElement('div');
-  indicatorsContainer.className = 'carousel-indicators';
-  indicatorsContainer.style.cssText = `
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  `;
-  
-  // Crear indicadores para cada día
-  itineraryDays.forEach((day, index) => {
-    const indicator = document.createElement('button');
-    indicator.className = 'carousel-indicator';
-    indicator.dataset.index = index;
-    indicator.setAttribute('aria-label', `Ir al día ${day.day}`);
-    indicator.style.cssText = `
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: none;
-      background: ${index === 0 ? 'var(--primary)' : '#ddd'};
-      cursor: pointer;
-      transition: all 0.3s ease;
-    `;
-    
-    indicator.addEventListener('click', () => {
-      this.goToSlide(index);
-    });
-    
-    indicatorsContainer.appendChild(indicator);
-  });
   
   // Crear botón siguiente
   const nextArrow = document.createElement('button');
   nextArrow.className = 'carousel-arrow carousel-arrow-next';
   nextArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
   nextArrow.setAttribute('aria-label', 'Siguiente día');
-  nextArrow.style.cssText = `
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid white;
-    background: rgba(255, 255, 255, 0.9);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  `;
+  
+  // Agregar flechas al contenedor
+  arrowsContainer.appendChild(prevArrow);
+  arrowsContainer.appendChild(nextArrow);
+  
+  // Crear contenedor de dots (separado)
+  const dotsContainer = document.createElement('div');
+  dotsContainer.className = 'carousel-dots-container';
+  
+  // Crear dots para cada día
+  itineraryDays.forEach((day, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot';
+    dot.dataset.index = index;
+    dot.setAttribute('aria-label', `Ir al día ${day.day}`);
+    
+    if (index === 0) {
+      dot.classList.add('active');
+    }
+    
+    dot.addEventListener('click', () => {
+      this.goToSlide(index);
+    });
+    
+    dotsContainer.appendChild(dot);
+  });
   
   // Eventos de las flechas
   prevArrow.addEventListener('click', () => {
@@ -625,18 +579,18 @@ createIndicators() {
     this.goToSlide(newIndex);
   });
   
-  // Efectos hover
+  // Efectos hover para flechas
   [prevArrow, nextArrow].forEach(arrow => {
     arrow.addEventListener('mouseenter', () => {
       arrow.style.background = 'var(--primary)';
-      arrow.querySelector('i').style.color = 'white';
       arrow.style.transform = 'scale(1.1)';
+      arrow.querySelector('i').style.color = 'white';
     });
     
     arrow.addEventListener('mouseleave', () => {
       arrow.style.background = 'rgba(255, 255, 255, 0.9)';
-      arrow.querySelector('i').style.color = 'var(--primary)';
       arrow.style.transform = 'scale(1)';
+      arrow.querySelector('i').style.color = 'var(--primary)';
     });
     
     // Pausar autoplay al interactuar con flechas
@@ -647,32 +601,27 @@ createIndicators() {
     });
   });
   
-  // Estilos de los iconos
-  const icons = indicatorsWrapper.querySelectorAll('i');
-  icons.forEach(icon => {
-    icon.style.cssText = `
-      color: var(--primary);
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    `;
-  });
+  // Agregar ambos contenedores al carrusel principal
+  this.container.appendChild(arrowsContainer);
+  this.container.appendChild(dotsContainer);
   
-  // Ensamblar todo
-  indicatorsWrapper.appendChild(prevArrow);
-  indicatorsWrapper.appendChild(indicatorsContainer);
-  indicatorsWrapper.appendChild(nextArrow);
-  
-  this.container.appendChild(indicatorsWrapper);
-  this.indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+  this.arrows = { prevArrow, nextArrow };
+  this.dots = dotsContainer.querySelectorAll('.carousel-dot');
 }
   
-  updateIndicators() {
-    if (!this.indicators) return;
-    
-    this.indicators.forEach((indicator, index) => {
-      indicator.style.background = index === this.currentIndex ? 'var(--primary)' : '#ddd';
-    });
-  }
+updateIndicators() {
+  if (!this.dots) return;
+  
+  this.dots.forEach((dot, index) => {
+    if (index === this.currentIndex) {
+      dot.classList.add('active');
+      dot.style.background = 'var(--primary)';
+    } else {
+      dot.classList.remove('active');
+      dot.style.background = '#ddd';
+    }
+  });
+}
   
   startAutoPlay() {
     if (this.animationId) {
@@ -1194,3 +1143,49 @@ window.LCDV.restartItineraryCarousel = function() {
   
   return itineraryCarouselInstance;
 };
+
+// ====================================
+// FORMULARIO DINÁMICO PARA CF7
+// ====================================
+function initCF7DynamicForm() {
+  const cf7Forms = document.querySelectorAll('.wpcf7-form');
+  
+  cf7Forms.forEach(form => {
+    const basicFields = form.querySelector('.basic-fields');
+    const additionalFields = form.querySelector('.additional-fields');
+    const formIndicator = form.querySelector('.form-indicator');
+    
+    if (!basicFields || !additionalFields) return;
+    
+    function showAdditionalFields() {
+      if (additionalFields.style.display === 'none') {
+        additionalFields.style.display = 'block';
+        form.classList.add('expanded');
+        
+        setTimeout(() => {
+          additionalFields.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest' 
+          });
+        }, 300);
+      }
+    }
+    
+    // Activar al hacer clic en campos básicos
+    const triggerInputs = basicFields.querySelectorAll('.form-input-trigger, input, select');
+    triggerInputs.forEach(input => {
+      input.addEventListener('click', showAdditionalFields);
+      input.addEventListener('focus', showAdditionalFields);
+      input.addEventListener('touchstart', showAdditionalFields, { passive: true });
+    });
+    
+    // Activar al hacer clic en cualquier parte del formulario
+    basicFields.addEventListener('click', showAdditionalFields);
+    basicFields.addEventListener('touchstart', showAdditionalFields, { passive: true });
+    
+    // Mostrar el indicador
+    if (formIndicator) {
+      formIndicator.style.display = 'block';
+    }
+  });
+}

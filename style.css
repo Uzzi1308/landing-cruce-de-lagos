@@ -1621,6 +1621,12 @@ body > section.hero > div > div.form-container.visible > h3 > i {
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(205, 25, 21, 0.3);
   text-decoration: none;
+  margin: 0 auto;
+}
+
+.container-btn-inline {
+  display: flex;
+  padding-bottom: 1rem;
 }
 
 .btn-reservar-inline:hover {
@@ -2797,284 +2803,455 @@ section { padding: 5rem 2rem; }
   position: relative;
 }
 
-.carousel-nav-btn {
+
+/* ====================================
+   ESTILOS PARA FLECHAS Y DOTS SEPARADOS
+   ==================================== */
+
+/* Contenedor de flechas - Posicionado en el centro de los slides */
+.carousel-arrows-container {
   position: absolute;
   top: 50%;
+  left: 0;
+  right: 0;
   transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  background: white;
-  border: 2px solid #ddd;
-  border-radius: 50%;
-  cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 10;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  padding: 0 15px;
+  pointer-events: none;
+  z-index: 20;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
-.carousel-nav-btn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  box-shadow: 0 6px 20px rgba(205, 25, 21, 0.3);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-nav-btn:active {
-  transform: translateY(-50%) scale(0.95);
-}
-
-.carousel-nav-btn i {
-  font-size: 1.2rem;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.carousel-nav-btn:hover i {
-  color: white;
-}
-
-.prev-carousel-btn {
-  left: 20px;
-}
-
-.next-carousel-btn {
-  right: 20px;
-}
-
-/* Responsive para móviles */
-@media (max-width: 768px) {
-  .carousel-nav-btn {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .carousel-nav-btn i {
-    font-size: 1rem;
-  }
-  
-  .prev-carousel-btn {
-    left: 10px;
-  }
-  
-  .next-carousel-btn {
-    right: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-nav-btn {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .carousel-nav-btn i {
-    font-size: 0.9rem;
-  }
-  
-  .prev-carousel-btn {
-    left: 5px;
-  }
-  
-  .next-carousel-btn {
-    right: 5px;
-  }
-}
-
-
-/* Estilos para los botones de navegación de la banda */
-.band-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  background: white;
-  border: 2px solid #ddd;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 10;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.band-nav-btn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  box-shadow: 0 6px 20px rgba(205, 25, 21, 0.3);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.band-nav-btn:active {
-  transform: translateY(-50%) scale(0.95);
-}
-
-.band-nav-btn i {
-  font-size: 1.2rem;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.band-nav-btn:hover i {
-  color: white;
-}
-
-.band-prev-btn {
-  left: 20px;
-}
-
-.band-next-btn {
-  right: 20px;
-}
-
-/* Responsive para móviles */
-@media (max-width: 768px) {
-  .band-nav-btn {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .band-nav-btn i {
-    font-size: 1rem;
-  }
-  
-  .band-prev-btn {
-    left: 10px;
-  }
-  
-  .band-next-btn {
-    right: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .band-nav-btn {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .band-nav-btn i {
-    font-size: 0.9rem;
-  }
-  
-  .band-prev-btn {
-    left: 5px;
-  }
-  
-  .band-next-btn {
-    right: 5px;
-  }
-}
-
-
-
-
-
-
-/* ESTILOS PARA INDICADORES DEL CARRUSEL */
-.carousel-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+/* Contenedor de dots - Posicionado abajo, centrado */
+.carousel-dots-container {
   position: absolute;
   bottom: 20px;
   left: 0;
   right: 0;
-  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 20;
+  padding: 10px 0;
 }
 
-.carousel-indicator {
-  width: 10px;
-  height: 10px;
+/* Estilos para flechas */
+.carousel-arrow {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  pointer-events: all;
+}
+
+.carousel-arrow i {
+  color: var(--primary);
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: var(--primary);
+  transform: scale(1.1);
+}
+
+.carousel-arrow:hover i {
+  color: white;
+}
+
+/* Estilos para dots */
+.carousel-dot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   border: none;
   background: #ddd;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
+  padding: 0;
 }
 
-.carousel-indicator:hover {
-  transform: scale(1.2);
+.carousel-dot:hover {
+  transform: scale(1.3);
+  background: var(--primary);
 }
 
-.carousel-indicator.active {
+.carousel-dot.active {
   background: var(--primary);
   transform: scale(1.3);
 }
 
-/* MEJORAS PARA EL CARRUSEL INFINITO */
-.infinite-carousel-container {
-  position: relative;
-  overflow: hidden;
-  padding: 2rem 0;
-}
-
-.infinite-carousel-track {
-  display: flex;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
-}
-
-.infinite-slide {
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-right: 8px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.infinite-slide:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-}
-
-/* RESPONSIVE PARA BOTONES DE NAVEGACIÓN */
+/* Responsive para móviles */
 @media (max-width: 768px) {
-
-  .feature-card {
-    gap: .5rem;
+  .carousel-arrows-container {
+    padding: 0 10px;
   }
-  .band-nav-btn {
+  
+  .carousel-arrow {
     width: 40px;
     height: 40px;
   }
   
-  .band-nav-btn i {
+  .carousel-arrow i {
     font-size: 1rem;
   }
   
-  .carousel-indicators {
+  .carousel-dots-container {
+    bottom: 15px;
+  }
+  
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-arrows-container {
+    padding: 0 5px;
+  }
+  
+  .carousel-arrow {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .carousel-arrow i {
+    font-size: 0.9rem;
+  }
+  
+  .carousel-dots-container {
     bottom: 10px;
   }
   
-  .carousel-indicator {
+  .carousel-dot {
     width: 8px;
     height: 8px;
   }
 }
 
-@media (max-width: 480px) {
-  .band-nav-btn {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .band-nav-btn i {
-    font-size: 0.9rem;
-  }
-  
-  .carousel-indicators {
-    bottom: 5px;
-  }
+/* Asegurar que el contenedor del carrusel tenga posición relativa */
+.infinite-carousel-container {
+  position: relative;
+  overflow: hidden;
 }
 
+
+
+
+
+
+/* ============================================
+   ESTILOS UNIFICADOS PARA FORMULARIOS (LOCALES Y CF7)
+   ============================================ */
+
+/* 1. OCULTAR LOS <br> QUE CF7 AGREGA AUTOMÁTICAMENTE */
+.wpcf7-form br,
+.wpcf7-form p br {
+    display: none !important;
+}
+
+/* 2. ELIMINAR MÁRGENES POR DEFECTO DE CF7 */
+.wpcf7-form p,
+.wpcf7 .wpcf7-form p {
+    margin: 0 0 1rem 0 !important;
+    padding: 0 !important;
+}
+
+/* 3. UNIFICAR ESTRUCTURA DE FORMULARIOS */
+.form-container .wpcf7-form,
+.modal-body .wpcf7-form,
+.form-fields-wrapper,
+.basic-fields,
+.additional-fields {
+    width: 100% !important;
+}
+
+/* 4. ESTILOS PARA LABELS (CF7 Y HTML) */
+.form-container label,
+.modal-body label,
+.wpcf7-form label,
+#bookingForm label,
+#bookingFormModal label {
+    display: block;
+    color: #333 !important;
+    margin-bottom: 0.6rem !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    padding-left: 0 !important;
+    position: relative !important;
+}
+
+/* Labels blancos en hero (formulario principal) */
+.form-container label,
+.form-container .wpcf7-form label,
+.form-container #bookingForm label {
+    color: #ffffff !important;
+}
+
+/* Labels en modal */
+.modal-body label,
+.modal-body .wpcf7-form label,
+.modal-body #bookingFormModal label {
+    color: #000 !important;
+}
+
+/* 5. ESTILOS PARA SPAN DENTRO DE LABELS (REEMPLAZAN A LOS ICONOS) */
+.form-container label span,
+.modal-body label span,
+.wpcf7-form label span {
+    display: block ;
+    margin-bottom: 0.4rem !important;
+    font-weight: 600 !important;
+}
+
+/* Agregar iconos FontAwesome a los spans usando pseudo-elementos */
+.form-container .wpcf7-form label:nth-child(1) span::before,
+.modal-body .wpcf7-form label:nth-child(1) span::before {
+    content: "\f007" !important; /* Icono usuario */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    color: inherit !important;
+}
+
+.form-container .wpcf7-form label:nth-child(2) span::before,
+.modal-body .wpcf7-form label:nth-child(2) span::before {
+    content: "\f0e0" !important; /* Icono email */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    color: inherit !important;
+}
+
+.form-container .wpcf7-form label:nth-child(3) span::before,
+.modal-body .wpcf7-form label:nth-child(3) span::before {
+    content: "\f095" !important; /* Icono teléfono */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    color: inherit !important;
+}
+
+.form-container .wpcf7-form label:nth-child(4) span::before,
+.modal-body .wpcf7-form label:nth-child(4) span::before {
+    content: "\f0c0" !important; /* Icono usuarios */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    color: inherit !important;
+}
+
+.form-container .wpcf7-form label:nth-child(5) span::before,
+.modal-body .wpcf7-form label:nth-child(5) span::before {
+    content: "\f073" !important; /* Icono calendario */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    color: inherit !important;
+}
+
+.form-container .wpcf7-form label:nth-child(6) span::before,
+.modal-body .wpcf7-form label:nth-child(6) span::before {
+    content: "\f072" !important; /* Icono avión */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    color: inherit !important;
+}
+
+.form-container .wpcf7-form label:nth-child(7) span::before,
+.modal-body .wpcf7-form label:nth-child(7) span::before {
+    content: "\f1ae" !important; /* Icono niño */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    color: inherit !important;
+}
+
+/* 6. CAMPOS DE FORMULARIO UNIFICADOS */
+.wpcf7-form-control:not([type="submit"]),
+.wpcf7 input[type="text"],
+.wpcf7 input[type="email"],
+.wpcf7 input[type="tel"],
+.wpcf7 input[type="date"],
+.wpcf7 select,
+#bookingForm input,
+#bookingForm select,
+#bookingFormModal input,
+#bookingFormModal select {
+    width: 100% !important;
+    padding: 0.7rem !important;
+    border: 2px solid #ddd !important;
+    border-radius: 8px !important;
+    font-size: 0.95rem !important;
+    transition: all 0.3s ease !important;
+    background: #f8f9fa !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+    box-sizing: border-box !important;
+    color: #333 !important;
+    margin: 0 !important;
+}
+
+/* 7. ESTADOS DE FOCO */
+.wpcf7-form-control:focus,
+.wpcf7 input:focus,
+.wpcf7 select:focus,
+#bookingForm input:focus,
+#bookingForm select:focus,
+#bookingFormModal input:focus,
+#bookingFormModal select:focus {
+    outline: none !important;
+    border-color: var(--primary) !important;
+    background: white !important;
+    box-shadow: 0 0 0 4px rgba(205, 25, 21, 0.1) !important;
+}
+
+/* 8. BOTONES DE ENVÍO UNIFICADOS */
+.wpcf7-submit,
+.wpcf7 input[type="submit"],
+#bookingForm .btn-submit-modal,
+#bookingFormModal .btn-submit-modal {
+    width: 100% !important;
+    padding: 1.1rem !important;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secundary) 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.8rem !important;
+    margin-top: 1rem !important;
+}
+
+/* Icono para botones de envío */
+.wpcf7-submit::before,
+.wpcf7 input[type="submit"]::before {
+    content: "\f1d8" !important; /* Icono avión de papel */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Hover de botones */
+.wpcf7-submit:hover,
+.wpcf7 input[type="submit"]:hover,
+#bookingForm .btn-submit-modal:hover,
+#bookingFormModal .btn-submit-modal:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 30px rgba(205, 25, 21, 0.4) !important;
+}
+
+/* 9. FORM-INDICATOR (para el formulario del home) */
+.form-indicator {
+    text-align: center !important;
+    color: #fff !important;
+    font-size: 0.9rem !important;
+    margin: 10px 0 !important;
+    font-style: italic !important;
+    opacity: 0.9 !important;
+}
+
+/* 10. ADICIONAL FIELDS - COMPORTAMIENTO DINÁMICO */
+.additional-fields {
+    display: none;
+    animation: fadeIn 0.5s ease forwards !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding-top: 1rem !important;
+    margin-top: 0.5rem !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 11. ESTILOS PARA SELECT ESPECÍFICOS */
+.wpcf7-select,
+#bookingForm select,
+#bookingFormModal select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23CD1915' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.7rem center !important;
+    background-size: 1em !important;
+    padding-right: 2.5rem !important;
+}
+
+/* 12. MENSAJES DE ERROR/ÉXITO DE CF7 */
+.wpcf7-not-valid-tip {
+    color: #ff6b6b !important;
+    font-size: 0.85rem !important;
+    margin-top: 0.3rem !important;
+    font-weight: 500 !important;
+}
+
+.wpcf7-response-output {
+    margin: 1rem 0 0 !important;
+    padding: 0.8rem 1rem !important;
+    border-radius: 8px !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    border: none !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.wpcf7-mail-sent-ok {
+    background: rgba(40, 167, 69, 0.2) !important;
+    color: #fff !important;
+    border: 1px solid rgba(40, 167, 69, 0.3) !important;
+}
+
+.wpcf7-mail-sent-ng,
+.wpcf7-validation-errors {
+    background: rgba(220, 53, 69, 0.2) !important;
+    color: #fff !important;
+    border: 1px solid rgba(220, 53, 69, 0.3) !important;
+}
+
+/* 13. RESPONSIVE */
+@media (max-width: 768px) {
+    .wpcf7-form-control:not([type="submit"]),
+    .wpcf7 input[type="text"],
+    .wpcf7 input[type="email"],
+    .wpcf7 input[type="tel"],
+    .wpcf7 input[type="date"],
+    .wpcf7 select {
+        padding: 0.8rem !important;
+        font-size: 1rem !important;
+    }
+    
+    .wpcf7-submit,
+    .wpcf7 input[type="submit"] {
+        padding: 1rem !important;
+        font-size: 1.1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container label span,
+    .modal-body label span,
+    .wpcf7-form label span {
+        font-size: 0.9rem !important;
+    }
+}
+
+#modalAdditionalFields {
+  display: block;
+}
